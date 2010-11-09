@@ -3,8 +3,8 @@ from collections import defaultdict
 from glob import glob
 data = defaultdict(dict)
 
-for filename in glob("results/*.ab.txt"):
-    case = filename[len("results/"):len(".ab.txt")*-1]
+for filename in glob("data/*.ab.txt"):
+    case = filename[len("data/"):len(".ab.txt")*-1]
 
     with open(filename) as fh:
         for line in fh:
