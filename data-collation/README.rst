@@ -80,8 +80,28 @@ command line::
 Results
 --------
 
-Invalid, rerunning test
+============== =============================
+Case            Requests per second          
+============== =============================
+control                               871.72
+direct                                864.28
+esi                                   201.15
+indirect                              157.14
+============== =============================
+
+============== ==============================
+Case            Time(ms) per request          
+============== ==============================
+control                                 1.147
+direct                                  1.157
+esi                                     4.971
+indirect                                6.364
+============== ==============================
 
 Conclusion
 -----------
+
+There is no question that direct access to the data would produce a
+the fastest result. It is the test case with the least number of
+moving parts.
 
