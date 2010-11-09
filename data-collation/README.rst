@@ -37,6 +37,25 @@ command line::
 
     ab -n 10000 -c 1 $URI
 
+Test Cases
+-----------
+
+control
+    Hard coded the response to create a baseline to compare the
+    overhead of the individual techniques
+
+direct
+    Uses a dictionary and string formatting to combine the two pieces
+    of data
+
+indirect
+    Uses urllib to fetch the two pieces of data by the means of
+    web resources identified by URIs
+
+esi
+    Uses Varnish's ESI functionality to fetch the two pieces of data
+    by means of web resources identified by URIs
+
 
 Results
 --------
