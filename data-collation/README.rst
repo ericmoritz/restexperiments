@@ -5,6 +5,9 @@ Data Collation is a very common need in a web application.  A front
 page of a website could be a combination of a number of pieces of
 data.
 
+Solutions
+----------
+
 A RESTful web application provides data as a set of resources
 identified by URIs.  Collation of data in a RESTful web application
 can be accomplished in a couple of ways:
@@ -20,6 +23,7 @@ Tradition web applications collate data in one way:
 
 Hypothesis
 -----------
+
 Internal collation with direct access to data will be faster than
 other methods
 
@@ -57,9 +61,9 @@ esi
     Uses Varnish's ESI functionality to fetch the two pieces of data
     by means of web resources identified by URIs
 
-
 Results
 --------
+
 ============== =============================
 Case            Requests per second          
 ============== =============================
@@ -78,7 +82,6 @@ esi                                     0.869
 indirect                                3.647
 ============== ==============================
 
-
 Conclusion
 -----------
 
@@ -92,3 +95,4 @@ but ESI performed favorably.
 In reality, the overhead in all solutions are in microsecond
 resolutions which is pretty damn fast.  I would be comfortable using
 any of these methods.
+
