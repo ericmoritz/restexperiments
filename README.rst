@@ -13,7 +13,15 @@ Requirements of a modern web applications
 A small requirement list of modern web applications are as
 follows:
 
-* Data Collation (data-collation/)
-* Caching (caching/)
-* Sessions (sessions/)
+* `Caching`_
+* `Data Collation`_
+* `Data Relationships`_
+* `Sessions`_
+
+Follow the links above to find the results of the individual experiments
+
+.. _Data Collation: https://github.com/ericmoritz/restexperiments/tree/master/data-collation/README.rst
+.. _Caching: https://github.com/ericmoritz/restexperiments/tree/master/caching/README.rst
+.. _Sessions: https://github.com/ericmoritz/restexperiments/tree/master/sessions/README.rst
+
 
