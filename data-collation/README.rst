@@ -15,6 +15,7 @@ can be accomplished in a couple of ways:
 * Internal collation with direct access to data
 
 Tradition web applications collate data in one way:
+
 * Internal collation with direct access to data
 
 Hypothesis
