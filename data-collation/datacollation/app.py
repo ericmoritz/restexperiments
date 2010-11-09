@@ -78,7 +78,7 @@ def indirect_access_varnish(environ, start_response):
 def esi_access(environ, start_response):
     start_response("200 OK", [("Content-Type", "text/plain")])
     src = ("""<esi:include src="http://localhost:8000/spouse"/>;"""
-           """<esi:include src="http://localhost:8000/children"/>;""")
+           """<esi:include src="http://localhost:8000/children"/>""")
     return [src]
 
 
