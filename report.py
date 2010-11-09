@@ -11,6 +11,11 @@ for filename in glob("results/*.ab.txt"):
             if "Requests per second:" in line:
                 key, value = line.split(":")
                 data[case]["rps"] = value.strip().split(" ")[0]
+            elif "Time per request:" in line and "(mean)" in line:
+                key, value = line.split(":")
+                data[case]["tps"] = value.strip().split(" ")[0]
+                
+
 
 def print_table(key_label, value_label, items):
     lcol = len(key_label) + 10
@@ -32,3 +37,11 @@ rps_result = [(case, d["rps"]) for case, d in data.items()]
 rps_result.sort(key=lambda item: float(item[1]), reverse=True)
 
 print_table("Case", "Requests per second", rps_result)
+
+print
+
+# sorry I couldn't resist using tps_report...
+tps_report = [(case, d["tps"]) for case, d in data.items()]
+tps_report.sort(key=lambda item: float(item[1]))
+
+print_table("Case", "Time(ms) per request", tps_report)
