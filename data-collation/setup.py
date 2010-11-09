@@ -20,6 +20,7 @@ setup(name='data-collation',
       install_requires=[
           # -*- Extra requirements: -*-
         "webob",
+        "gevent",
       ],
       entry_points="""
       # -*- Entry points: -*-

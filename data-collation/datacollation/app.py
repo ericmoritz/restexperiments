@@ -2,10 +2,21 @@ from datetime import datetime
 import time
 import urllib
 from webob import Response, Request
+import gevent
+from gevent import monkey; monkey.patch_socket()
 
+def GET(*uris):
+    def co(uri):
+        return urllib.urlopen(uri).read()
 
-def GET(uri):
-    return urllib.urlopen(uri).read()
+    jobs = [gevent.spawn(co, uri) for uri in uris]
+    gevent.joinall(jobs, timeout=2)
+
+    values = [j.value for j in jobs]
+    if len(jobs) == 1:
+        return values[0]
+    else:
+        return values
 
 def never_cache(app):
     def inner(environ, start_response):
@@ -58,15 +69,15 @@ def direct_access(environ, start_response):
 
 
 def indirect_access(environ, start_response):
-    spouse = GET("http://localhost:8000/spouse")
-    children= GET("http://localhost:8000/children")
+    spouse, children = GET("http://localhost:8000/spouse",
+                           "http://localhost:8000/children")
     
     start_response("200 OK", [("Content-Type", "text/plain")])
     return ["%s;%s" % (spouse, children)]
 
 def indirect_access_varnish(environ, start_response):
-    spouse = GET("http://localhost:10001/spouse")
-    children= GET("http://localhost:10001/children")
+    spouse, children = GET("http://localhost:10001/spouse",
+                           "http://localhost:10001/children")
     
     start_response("200 OK", [("Content-Type", "text/plain")])
     return ["%s;%s" % (spouse, children)]
