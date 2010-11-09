@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        PasteWSGIServer/0.5
+Server Hostname:        localhost
+Server Port:            10001
+
+Document Path:          /esi
+Document Length:        37 bytes
+
+Concurrency Level:      1
+Time taken for tests:   49.870 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Total transferred:      3950000 bytes
+HTML transferred:       370000 bytes
+Requests per second:    200.52 [#/sec] (mean)
+Time per request:       4.987 [ms] (mean)
+Time per request:       4.987 [ms] (mean, across all concurrent requests)
+Transfer rate:          77.35 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     3    5   1.0      5      92
+Waiting:        0    2   0.9      2      88
+Total:          3    5   1.0      5      92
+
+Percentage of the requests served within a certain time (ms)
+  50%      5
+  66%      5
+  75%      5
+  80%      5
+  90%      5
+  95%      6
+  98%      6
+  99%      6
+ 100%     92 (longest request)
