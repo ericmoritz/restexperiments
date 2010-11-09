@@ -22,17 +22,53 @@ Hypothesis
 Internal collation with direct access to data will be faster than
 other methods
 
+Methodology
+------------
+
+I started varnish using the ../start_varnish.sh script.  In order to
+accomplish the indirect test case I needed a multiprocess server.  I
+used gunicorn with the following command line::
+
+    cd datacollation
+    gunicorn -w 3 app
+
+I then ran *test.sh* which test each case using ab with the following
+command line::
+
+    ab -n 10000 -c 1 $URI
+
+
+Results
+--------
 ============== =============================
 Case            Requests per second          
 ============== =============================
-control                              1438.96
-direct                               1232.23
-esi                                   846.13
-indirect                              167.89
+control                              1718.27
+direct                               1686.63
+esi                                  1150.59
+indirect                              274.19
 ============== =============================
+
+============== ==============================
+Case            Time(ms) per request          
+============== ==============================
+control                                 0.582
+direct                                  0.593
+esi                                     0.869
+indirect                                3.647
+============== ==============================
+
 
 Conclusion
 -----------
-My Hypothesis proved to be correct.  It's quite obvious that collating
-data internally proves to be the fastest method; it is the method with
-the least overhead.
+
+There is no question that direct access to the data would produce a
+the fastest result.  It is the test case with the least number of
+moving parts.
+
+It was quite surprising that the indirect method performed so poorly
+but ESI performed favorably.
+
+In reality, the overhead in all solutions are in microsecond
+resolutions which is pretty damn fast.  I would be comfortable using
+any of these methods.
