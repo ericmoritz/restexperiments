@@ -19,7 +19,9 @@ setup(name='data-collation',
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+        "httplib2",
         "webob",
+        "paste",
       ],
       entry_points="""
       # -*- Entry points: -*-

@@ -2,16 +2,19 @@ from datetime import datetime
 import time
 import urllib
 from webob import Response, Request
+from httplib2 import Http
 
+http_client = Http("/tmp/httplib2_cache")
 
 def GET(uri):
-    return urllib.urlopen(uri).read()
+    resp, content = http_client.request(uri, "GET")
+    return content
 
 def never_cache(app):
     def inner(environ, start_response):
         req = Request(environ)
         resp = req.get_response(app)
-        resp.expires = datetime.utcnow()
+        resp.cache_expires(0)
         return resp(environ, start_response)
     return inner
 
@@ -79,30 +82,52 @@ def esi_access(environ, start_response):
     return [src]
 
 
-def application(environ, start_response):
-    resource_map = {
+class FrontController(object):
+    def __init__(self, resource_map, debug=False):
+        self.debug = debug
+        self.resource_map = resource_map
+        if "/" not in self.resource_map:
+            self.resource_map['/'] = self.index
+
+    def index(self, environ, start_response):
+        req = Request(environ)
+
+        urls = [req.host_url + req.relative_url(uri)
+                for uri in self.resource_map]
+    
+        start_response("200 OK", [("Content-Type", 'text/plain')])
+        return ["\n".join(urls)]
+
+    def __call__(self, environ, start_response):
+        try:
+            app = self.resource_map[environ['PATH_INFO']]
+        except KeyError:
+            start_response("404 Not Found", [])
+            return []
+
+        return app(environ, start_response)
+
+        
+
+
+application = FrontController({
         # collation resources
         '/control': control,
         '/direct': direct_access,
         '/indirect': indirect_access,
-        '/indirect_varnish': indirect_access_varnish,
         '/esi': esi_access,
 
         # data resources
         '/spouse': spouse,
         '/children': children,
-        }
-    try:
-        app = resource_map[environ['PATH_INFO']]
-    except KeyError:
-        start_response("404 Not Found", [])
-        return []
+ })
 
-    return never_cache(app)(environ, start_response)
+# Make it so that varnish never caches any of the data collation responses
+application = never_cache(application)
 
 if __name__ == '__main__':
-    from wsgiref.simple_server import make_server
-    httpd = make_server('', 8000, application)
-    print "Serving on port 8000..."
-    httpd.serve_forever()
-    
+    from paste.httpserver import serve
+    serve(application, host="127.0.0.1",
+          use_threadpool=True,
+          threadpool_workers=5,
+          port=8000)

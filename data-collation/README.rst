@@ -27,23 +27,24 @@ Hypothesis
 Internal collation with direct access to data will be faster than
 other methods
 
-Methodology
-------------
-
-I started varnish using the ../start_varnish.sh script.  In order to
-accomplish the indirect test case I needed a multiprocess server.  I
-used gunicorn with the following command line::
-
-    cd datacollation
-    gunicorn -w 3 app
-
-I then ran *test.sh* which test each case using ab with the following
-command line::
-
-    ab -n 10000 -c 1 $URI
 
 Test Cases
 -----------
+Each test case is accomplished using a separate WSGI application
+mounted at a URI of it's name.  Each application is responsible for
+taking two pieces of data, "spouse" and "children" which correspond to
+the relationships in my immediate family.  In essence they're
+representing my close relations.
+
+The response of each should produce the following output::
+
+    Gina Moritz;Aiden Moritz,Ethan Moritz
+
+We are working with simple string formatting here to eliminate
+variables introduced by template engines.
+
+Cases
+~~~~~~~~~~~~
 
 control
     Hard coded the response to create a baseline to compare the
@@ -61,38 +62,26 @@ esi
     Uses Varnish's ESI functionality to fetch the two pieces of data
     by means of web resources identified by URIs
 
+
+Methodology
+------------
+I started varnish using the ../start_varnish.sh script.  In order to
+accomplish the indirect test case I needed a multiprocess server.  I
+used gunicorn with the following command line::
+
+    cd datacollation
+    gunicorn -w 3 app
+
+I then ran *test.sh* which test each case using ab with the following
+command line::
+
+    ab -n 10000 -c 1 $URI
+
 Results
 --------
 
-============== =============================
-Case            Requests per second          
-============== =============================
-control                              1718.27
-direct                               1686.63
-esi                                  1150.59
-indirect                              274.19
-============== =============================
-
-============== ==============================
-Case            Time(ms) per request          
-============== ==============================
-control                                 0.582
-direct                                  0.593
-esi                                     0.869
-indirect                                3.647
-============== ==============================
+Invalid, rerunning test
 
 Conclusion
 -----------
-
-There is no question that direct access to the data would produce a
-the fastest result.  It is the test case with the least number of
-moving parts.
-
-It was quite surprising that the indirect method performed so poorly
-but ESI performed favorably.
-
-In reality, the overhead in all solutions are in microsecond
-resolutions which is pretty damn fast.  I would be comfortable using
-any of these methods.
 
