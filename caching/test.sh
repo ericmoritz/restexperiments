@@ -17,7 +17,7 @@ for i in control memcache libmc simple middleware varnish_indirect; do
   echo "Priming the $i cache"
   curl $URI > results/$i.out.txt
   assertequal "$(cat results/$i.out.txt)" "Gina Moritz;Aiden Moritz,Ethan Moritz"
-  ab -n $SAMPLE_SIZE -c1 $URI  > results/$i.ab.txt
+  ab -n $SAMPLE_SIZE -c1 -e results/$i.csv -g results/$i.gplot $URI > results/$i.ab.txt
 done
 
 # Do the varnish testing
@@ -26,13 +26,13 @@ for i in esi; do
   echo "Priming the $i cache"
   curl $URI > results/$i.out.txt
   assertequal "$(cat results/$i.out.txt)" "Gina Moritz;Aiden Moritz,Ethan Moritz"
-  ab -n $SAMPLE_SIZE -c1 $URI  > results/$i.ab.txt
+  ab -n $SAMPLE_SIZE -c1 -e results/$i.csv -g results/$i.gplot $URI  > results/$i.ab.txt
 done
 
 # Do the client side tests (aka AJAX)
-for i in spouse children ajax.html; do
+for i in spouse children esi.tmpl; do
   URI=http://localhost:10001/$i
   echo "Priming the $i cache"
-  curl $URI > results/ajax-$i.out.btxt
-  ab -n $SAMPLE_SIZE -c1 $URI  > results/ajax-$i.ab.txt
+  curl $URI > results/ajax-$i.out.txt
+  ab -n $SAMPLE_SIZE -c1 -e results/ajax-$i.csv -g results/ajax-$i.gplot $URI  > results/ajax-$i.ab.txt
 done
