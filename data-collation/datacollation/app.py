@@ -82,6 +82,18 @@ def esi_access(environ, start_response):
     return [src]
 
 
+def ajax_html(environ, start_response):
+    start_response("200 OK", [("Content-Type", "text/html")])
+    
+    # This is some pseudo-code to mimic some code on-demand
+    # that will collate the data client side
+    src = """<script>
+document.write(GET("http://localhost:10001/spouse"));
+document.write(GET("http://localhost:10001/children"));</script>"""
+
+    return [src]
+
+
 class FrontController(object):
     def __init__(self, resource_map, debug=False):
         self.debug = debug
@@ -117,9 +129,13 @@ application = FrontController({
         '/indirect': indirect_access,
         '/esi': esi_access,
 
+        # Client side collator
+        '/ajax.html': ajax_html,
+
         # data resources
         '/spouse': spouse,
         '/children': children,
+
  })
 
 # Make it so that varnish never caches any of the data collation responses
