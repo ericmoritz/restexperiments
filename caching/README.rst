@@ -156,7 +156,7 @@ that a client would use to collate the
 
 It is hard to come up with accurate numbers due to the unknown
 overhead that would be introduced by the processing the 
-ajax.html file.  An additional unknown is the benefit of
+emi.tmpl file.  An additional unknown is the benefit of
 the ability of browsers to fetch resources asyncronously.
 
 I am going to fudge things and assume that the benefit
