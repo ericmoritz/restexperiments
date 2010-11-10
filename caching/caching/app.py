@@ -76,18 +76,20 @@ def get_cached_data(client):
 #
 # Internal caching cases
 # -----------------------
+@expires(30)
 def mc_app(environ, start_response):
     data = get_cached_data(memcached_client)
     start_response("200 OK", [])
     return render(data)
 
 
+@expires(30)
 def libmc_app(environ, start_response):
     data = get_cached_data(libmc_client)
     start_response("200 OK", [])
     return render(data)
 
-
+@expires(30)
 def simple_app(environ, start_response):
     data = get_cached_data(simplecache)
     start_response("200 OK", [])
@@ -110,7 +112,7 @@ mw_spouse = internal_http_cache(spouse)
 mw_children = internal_http_cache(children)
 
 
-@never_cache
+@expires(30)
 def middleware_app(environ, start_response):
     spouse = GET("http://localhost:8000/mw_spouse")
     children = GET("http://localhost:8000/mw_children")
@@ -136,7 +138,7 @@ def middleware_app(environ, start_response):
 # pulls the content through Varnish in order to have Varnish handle the
 # HTTP caching of the ressources
 #
-@never_cache
+@expires(30)
 def varnish_indirect(environ, start_response):
     spouse = GET("http://localhost:10001/spouse")
     children = GET("http://localhost:10001/children")
@@ -149,7 +151,6 @@ def varnish_indirect(environ, start_response):
 # /children resources because they have the proper expires headers. This is
 # assuming that Varnish caching ESI requests
 varnish_esi = never_cache(esi_access)
-
 
 application = FrontController({
         # Resources with the expire headers
