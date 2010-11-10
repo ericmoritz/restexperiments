@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import sys
 from collections import defaultdict
 from glob import glob
+from decimal import Decimal
 data = defaultdict(dict)
 
 for filename in glob("data/*.ab.txt"):
@@ -17,26 +19,39 @@ for filename in glob("data/*.ab.txt"):
                 
 
 
-def print_table(key_label, value_label, items):
-    lcol = len(key_label) + 10
-    rcol = len(value_label) + 10
+def print_table(key_label, value_label, control, items):
     
-    print "%s %s" % ("=" * lcol,
-                     "=" * rcol)
-    print "%s  %s" % (key_label.ljust(lcol),
-                     value_label.ljust(rcol))
-    print "%s %s" % ("=" * lcol,
-                     "=" * rcol)
+    key_lengths = [len(key) for key,val in items]
+    val_lengths = [len(val) for key,val in items]
+    lcol = max([len(key_label)]+key_lengths) + 1
+    rcol = max([len(value_label)]+ val_lengths) + 1
+    
+    print "%s %s %s" % ("=" * lcol,
+                        "=" * rcol,
+                        "=" * rcol)
+    print "%s  %s %s" % (key_label.ljust(lcol),
+                          value_label.ljust(rcol),
+                        "± control".rjust(rcol))
+    print "%s %s %s" % ("=" * lcol,
+                        "=" * rcol,
+                        "=" * rcol)
     for key, value in items:
-        print "%s %s" % (key.ljust(lcol),
-                         value.rjust(rcol))
-    print "%s %s" % ("=" * lcol,
-                     "=" * rcol)
+        diff = Decimal(control) - Decimal(value)
+        diff = unicode(diff)
+        print "%s %s %s" % (key.ljust(lcol),
+                            value.rjust(rcol),
+                            diff.rjust(rcol))
+
+    print "%s %s %s" % ("=" * lcol,
+                        "=" * rcol,
+                        "=" * rcol)    
+
+control = data['control']
 
 rps_result = [(case, d["rps"]) for case, d in data.items()]
 rps_result.sort(key=lambda item: float(item[1]), reverse=True)
 
-print_table("Case", "Requests per second", rps_result)
+print_table("Case", "Requests per second", control['rps'], rps_result)
 
 print
 
@@ -44,4 +59,4 @@ print
 tps_report = [(case, d["tps"]) for case, d in data.items()]
 tps_report.sort(key=lambda item: float(item[1]))
 
-print_table("Case", "Time(ms) per request", tps_report)
+print_table("Case", "Time(ms) per request", control['tps'], tps_report)
