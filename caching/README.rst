@@ -113,29 +113,63 @@ test case::
 Results
 --------
 
+Serve Side Collation/Caching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These are the numbers for cases that are collated on the
+server
+
 ================= ==================== ====================
 Case               Requests per second            ± control
 ================= ==================== ====================
-control                        1322.38                 0.00
-esi                             635.09               687.29
-libmc                           549.96               772.42
-memcache                        518.60               803.78
-middleware                      509.70               812.68
-simple                          507.27               815.11
-varnish_indirect                396.42               925.96
+control                        1314.49                 0.00
+esi                             634.87               679.62
+middleware                      523.15               791.34
+varnish_indirect                506.06               808.43
+libmc                           455.98               858.51
+memcache                        439.60               874.89
+simple                          426.61               887.88
 ================= ==================== ====================
 
 ================= ===================== =====================
 Case               Time(ms) per request             ± control
 ================= ===================== =====================
-control                           0.756                 0.000
-esi                               1.575                -0.819
-libmc                             1.818                -1.062
-memcache                          1.928                -1.172
-middleware                        1.962                -1.206
-simple                            1.971                -1.215
-varnish_indirect                  2.523                -1.767
+control                           0.761                 0.000
+esi                               1.575                -0.814
+middleware                        1.912                -1.151
+varnish_indirect                  1.976                -1.215
+libmc                             2.193                -1.432
+memcache                          2.275                -1.514
+simple                            2.344                -1.583
 ================= ===================== =====================
+
+Client-Side Collating
+~~~~~~~~~~~~~~~~~~~~~~
+
+This is the result of Client-Side Collating of the resources.
+There are three resources requested. /spouse, /children, and
+/ajax.html to mimic the number of requests needed to collate
+the two resources.  The /ajax.html response is simply some
+pseudocode that resembles the code needed to collate the 
+/spouse and /children resources.
+
+It is hard to come up with accurate numbers due to the unknown
+overhead that would be introduced by the processing the 
+ajax.html file.  An additional unknown is the benefit of
+the ability of browsers to fetch resources asyncronously.
+
+I am going to fudge things and assume that the benefit
+of async fetching and the overhead of processing cancel 
+each other out.  To calculate the mean time per request
+I will sum the total time for each tests and divide by
+the sample size.
+
+================= =====================
+Case               Time(ms) per request
+================= =====================
+ajax                              0.626
+esi                               1.575
+
 
 Conclusion
 -----------
@@ -146,4 +180,7 @@ is quite negligable.  I am still quite disapointed by the indirect
 performance.  I'd like to investigate that further to see what is
 causing the overhead.
 
-
+When considering ESI versus client-side collating of cached data.
+It appears that fetching three cached resources is faster than
+fetching one uncached ESI collated resource that was built using
+cached resources
