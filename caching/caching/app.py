@@ -157,7 +157,7 @@ application = FrontController({
         # Resources with the expire headers
         '/spouse': spouse,
         '/children': children,
-        '/ajax.html': expires(30)(ajax_html),
+        '/esi.tmpl': expires(30)(esi_access),
 
         # The above resources wrapped with the HTTP caching middleware
         '/mw_spouse': mw_spouse,
