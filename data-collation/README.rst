@@ -62,6 +62,10 @@ esi
     Uses Varnish's ESI functionality to fetch the two pieces of data
     by means of web resources identified by URIs
 
+ajax
+    Ajax is only simulated by benchmarking the two data resources
+    and the esi template.  I sum the three rps numbers to get a 
+    rough guess at how long the batch would take
 
 Methodology
 ------------
@@ -80,23 +84,35 @@ command line::
 Results
 --------
 
-============== =============================
-Case            Requests per second          
-============== =============================
-control                               871.72
-direct                                864.28
-esi                                   201.15
-indirect                              157.14
-============== =============================
+============== ==================== ====================
+Case            Requests per second            ± control
+============== ==================== ====================
+direct                       873.98                -5.89
+control                      868.09                 0.00
+esi                          200.65               667.44
+indirect                     160.22               707.87
+============== ==================== ====================
 
-============== ==============================
-Case            Time(ms) per request          
-============== ==============================
-control                                 1.147
-direct                                  1.157
-esi                                     4.971
-indirect                                6.364
-============== ==============================
+============== ===================== =====================
+Case            Time(ms) per request             ± control
+============== ===================== =====================
+direct                         1.144                 0.008
+control                        1.152                 0.000
+esi                            4.984                -3.832
+indirect                       6.241                -5.089
+============== ===================== =====================
+
+Client Side Collation
+~~~~~~~~~~~~~~~~~~~~~~
+
+============== =====================
+Case            Time(ms) per request
+============== =====================
+direct                         1.144
+ajax                           4.201
+esi                            4.984 
+============== =====================
+
 
 Conclusion
 -----------
