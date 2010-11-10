@@ -21,12 +21,12 @@ Internal data caching focuses on caching the actual data that is used
 to generate an output.  The process of cache validation is as
 follows::
 
-    if key not in cache:
-        data = get_current_data()
-        cache.set(key, data, expiration)
-    else:
-        data = cache.get(key)
+    data = cache.get(key)
+    if data is None:
+        data = get_data()
+	cache.set(key, data, seconds)
     return data
+
     
 HTTP/1.1 caching
 ~~~~~~~~~~~~~~~~~
@@ -44,7 +44,23 @@ is never contacted when the response is cached.
 
 Test Cases
 -----------
+The tests are based on the data-collate example.  The WSGI applications
+will produces the following response::
 
+    Gina Moritz;Aiden Moritz,Ethan Moritz
+
+For this experiment the WSGI applications will be working with cached
+data instead of live content.  
+
+The internal caching methods will get the spouse and children data
+from the cache individually to simulate the process a web develop
+would go through to retrieve two pieces of data from a cache
+
+The HTTP/1.1 tests will fetch the two piece of data through URIs
+that have the appropriate expiration headers set.
+
+Cases
+~~~~~~
 control
     Response is hard-coded to produce a baseline
 
@@ -63,11 +79,16 @@ libmc
     the most popular libmemcached solution.
 
 middleware
-    A WSGI middleware is used with HTTP/1.1 caching to provide
-    in-application HTTP/1.1 caching
+    A WSGI app will fetch two resources who have been cached using
+    HTTP/1.1 by the means of internal caching 
 
-varnish
-    Varnish is used to provide external HTTP/1.1 caching
+varnish_indirect
+    A WSGI app will fetch two resources who have been cached using
+    HTTP/1.1 via Varnish
+
+esi
+    A WSGI app provides a ESI template that Varnish uses to collate
+    two HTTP cached resources
 
 Methodology
 ------------
