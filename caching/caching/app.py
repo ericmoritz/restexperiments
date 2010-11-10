@@ -1,6 +1,7 @@
 # use the data and resources from the data collation experiment
 from datacollation.app import (control, spouse, children, FrontController,
-                               get_data, never_cache, esi_access, GET)
+                               get_data, never_cache, esi_access, GET,
+                               ajax_html)
 import pylibmc
 import memcache
 from werkzeug.contrib.cache import SimpleCache
@@ -156,6 +157,7 @@ application = FrontController({
         # Resources with the expire headers
         '/spouse': spouse,
         '/children': children,
+        '/ajax.html': expires(30)(ajax_html),
 
         # The above resources wrapped with the HTTP caching middleware
         '/mw_spouse': mw_spouse,
