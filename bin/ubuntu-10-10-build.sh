@@ -1,13 +1,6 @@
 # Get dependancies
-add-apt-repository ppa:stevecrozz/ppa # for uwsgi
 apt-get -y update
-apt-get -y install nginx git varnish python-setuptools memcached apache2-utils python-dev build-essential
-
-# Create a new virtual env
-easy_install virtualenv
-rm -rf env
-virtualenv env --no-site-packages
-. env/bin/activate
+apt-get -y install git varnish python-setuptools memcached apache2-utils python-dev build-essential python-software-properties libxml2-dev nginx libpcre3 libpcre3-dev
 
 # Build libmemcached
 mkdir src
@@ -16,6 +9,25 @@ pushd src
   pushd libmemcached-0.44
     ./configure && make install
     ldconfig
+  popd
+popd
+
+# Build uwsgi
+pushd src
+  curl http://projects.unbit.it/downloads/uwsgi-0.9.6.5.tar.gz | tar xz
+  pushd uwsgi-0.9.6.5
+    make
+    cp uwsgi ../../bin
+  popd
+popd
+
+# Build nginx
+pushd src
+  curl http://nginx.org/download/nginx-0.8.53.tar.gz | tar xz
+  pushd nginx-0.8.53
+    ./configure
+    make
+    cp objs/nginx ../../bin
   popd
 popd
 
