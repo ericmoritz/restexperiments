@@ -1,5 +1,6 @@
 rm results/*
 
+SAMPLE_SIZE=10000
 function assertequal {
     if [ "$1" != "$2" ]; then
 	echo "Got \"$1\""
@@ -19,7 +20,7 @@ for i in control memcache libmc simple middleware; do
   echo "Priming the $i cache"
   curl $URI > results/$i.out.txt
   assertequal "$(cat results/$i.out.txt)" "Gina Moritz;Aiden Moritz,Ethan Moritz"
-  ab -n 1000 -c1 $URI  > results/$i.ab.txt
+  ab -n $SAMPLE_SIZE -c1 $URI  > results/$i.ab.txt
 done
 
 # Do the varnish testing
@@ -28,5 +29,5 @@ for i in varnish_indirect esi; do
   echo "Priming the $i cache"
   curl $URI > results/$i.out.txt
   assertequal "$(cat results/$i.out.txt)" "Gina Moritz;Aiden Moritz,Ethan Moritz"
-  ab -n 1000 -c1 $URI  > results/$i.ab.txt
+  ab -n $SAMPLE_SIZE -c1 $URI  > results/$i.ab.txt
 done
