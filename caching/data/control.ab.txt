@@ -13,21 +13,21 @@ Document Path:          /control
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   7.562 seconds
+Time taken for tests:   7.608 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      1800000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    1322.38 [#/sec] (mean)
-Time per request:       0.756 [ms] (mean)
-Time per request:       0.756 [ms] (mean, across all concurrent requests)
-Transfer rate:          232.45 [Kbytes/sec] received
+Requests per second:    1314.49 [#/sec] (mean)
+Time per request:       0.761 [ms] (mean)
+Time per request:       0.761 [ms] (mean, across all concurrent requests)
+Transfer rate:          231.06 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     0    1   0.1      1       1
+Processing:     0    1   0.1      1       2
 Waiting:        0    0   0.1      0       1
 Total:          1    1   0.1      1       2
 

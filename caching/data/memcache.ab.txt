@@ -13,25 +13,23 @@ Document Path:          /memcache
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   19.283 seconds
+Time taken for tests:   22.748 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Total transferred:      1540000 bytes
+Total transferred:      2980000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    518.60 [#/sec] (mean)
-Time per request:       1.928 [ms] (mean)
-Time per request:       1.928 [ms] (mean, across all concurrent requests)
-Transfer rate:          77.99 [Kbytes/sec] received
+Requests per second:    439.60 [#/sec] (mean)
+Time per request:       2.275 [ms] (mean)
+Time per request:       2.275 [ms] (mean, across all concurrent requests)
+Transfer rate:          127.93 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       2
-Processing:     1    2   0.2      2      10
-Waiting:        0    0   0.2      1       2
-Total:          1    2   0.2      2      10
-ERROR: The median and mean for the waiting time are more than twice the standard
-       deviation apart. These results are NOT reliable.
+Connect:        0    0   0.0      0       1
+Processing:     2    2   0.6      2      55
+Waiting:        0    1   0.6      1      54
+Total:          2    2   0.6      2      55
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -40,6 +38,6 @@ Percentage of the requests served within a certain time (ms)
   80%      2
   90%      2
   95%      2
-  98%      2
-  99%      2
- 100%     10 (longest request)
+  98%      3
+  99%      3
+ 100%     55 (longest request)
