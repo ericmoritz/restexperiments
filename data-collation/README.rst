@@ -113,6 +113,22 @@ ajax                           4.201
 esi                            4.984 
 ============== =====================
 
+This is the result of Client-Side Collating of the resources.
+There are three resources requested. /spouse, /children, and
+/emi.tmpl to mimic the number of requests needed to collate
+the two resources.  The /emi.tmpl response is the emi template
+that a client would use to collate the 
+/spouse and /children resources.
+
+It is hard to come up with accurate numbers due to the unknown
+overhead that would be introduced by the processing the 
+emi.tmpl file.  An additional unknown is the benefit of
+the ability of browsers to fetch resources asyncronously.
+
+I am going to fudge things and assume that the benefit
+of async fetching and the overhead of processing cancel 
+each other out.  To calculate the mean time per request
+I simply sum the three mean time per request values.
 
 Conclusion
 -----------
@@ -120,4 +136,3 @@ Conclusion
 There is no question that direct access to the data would produce a
 the fastest result. It is the test case with the least number of
 moving parts.
-
