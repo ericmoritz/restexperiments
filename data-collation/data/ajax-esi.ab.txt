@@ -9,29 +9,27 @@ Server Software:        PasteWSGIServer/0.5
 Server Hostname:        localhost
 Server Port:            8000
 
-Document Path:          /control
-Document Length:        37 bytes
+Document Path:          /esi
+Document Length:        101 bytes
 
 Concurrency Level:      1
-Time taken for tests:   11.520 seconds
+Time taken for tests:   11.515 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Total transferred:      3470000 bytes
-HTML transferred:       370000 bytes
-Requests per second:    868.09 [#/sec] (mean)
+Total transferred:      4110000 bytes
+HTML transferred:       1010000 bytes
+Requests per second:    868.41 [#/sec] (mean)
 Time per request:       1.152 [ms] (mean)
 Time per request:       1.152 [ms] (mean, across all concurrent requests)
-Transfer rate:          294.17 [Kbytes/sec] received
+Transfer rate:          348.55 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
 Processing:     1    1   0.2      1      14
-Waiting:        0    0   0.3      1      14
+Waiting:        0    1   0.3      1      14
 Total:          1    1   0.2      1      14
-ERROR: The median and mean for the waiting time are more than twice the standard
-       deviation apart. These results are NOT reliable.
 
 Percentage of the requests served within a certain time (ms)
   50%      1

@@ -13,31 +13,31 @@ Document Path:          /indirect
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   63.636 seconds
+Time taken for tests:   62.413 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      3470000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    157.14 [#/sec] (mean)
-Time per request:       6.364 [ms] (mean)
-Time per request:       6.364 [ms] (mean, across all concurrent requests)
-Transfer rate:          53.25 [Kbytes/sec] received
+Requests per second:    160.22 [#/sec] (mean)
+Time per request:       6.241 [ms] (mean)
+Time per request:       6.241 [ms] (mean, across all concurrent requests)
+Transfer rate:          54.29 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.1      0       0
-Processing:     5    6   5.9      6     579
-Waiting:        3    6   5.9      6     579
-Total:          5    6   5.9      6     579
+Connect:        0    0   0.1      0       1
+Processing:     5    6   1.1      6     104
+Waiting:        2    6   1.1      6     103
+Total:          5    6   1.1      6     104
 
 Percentage of the requests served within a certain time (ms)
   50%      6
   66%      6
-  75%      7
+  75%      6
   80%      7
   90%      7
   95%      7
   98%      7
-  99%      8
- 100%    579 (longest request)
+  99%      7
+ 100%    104 (longest request)
