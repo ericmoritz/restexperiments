@@ -13,23 +13,23 @@ Document Path:          /middleware
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   19.115 seconds
+Time taken for tests:   18.944 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      2840000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    523.15 [#/sec] (mean)
-Time per request:       1.912 [ms] (mean)
-Time per request:       1.912 [ms] (mean, across all concurrent requests)
-Transfer rate:          145.09 [Kbytes/sec] received
+Requests per second:    527.88 [#/sec] (mean)
+Time per request:       1.894 [ms] (mean)
+Time per request:       1.894 [ms] (mean, across all concurrent requests)
+Transfer rate:          146.40 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.1      0       1
-Processing:     1    2   0.3      2      15
-Waiting:        0    1   0.5      1      14
-Total:          2    2   0.2      2      15
+Processing:     1    2   0.2      2      16
+Waiting:        0    1   0.5      1       9
+Total:          2    2   0.2      2      16
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -40,4 +40,4 @@ Percentage of the requests served within a certain time (ms)
   95%      2
   98%      2
   99%      3
- 100%     15 (longest request)
+ 100%     16 (longest request)

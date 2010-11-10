@@ -1,3 +1,0 @@
-<script>
-document.write(GET("http://localhost:10001/spouse"));
-document.write(GET("http://localhost:10001/children"));</script>

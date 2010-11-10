@@ -13,28 +13,26 @@ Document Path:          /esi
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   15.751 seconds
+Time taken for tests:   16.450 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Total transferred:      3950000 bytes
+Total transferred:      3960000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    634.87 [#/sec] (mean)
-Time per request:       1.575 [ms] (mean)
-Time per request:       1.575 [ms] (mean, across all concurrent requests)
-Transfer rate:          244.90 [Kbytes/sec] received
+Requests per second:    607.92 [#/sec] (mean)
+Time per request:       1.645 [ms] (mean)
+Time per request:       1.645 [ms] (mean, across all concurrent requests)
+Transfer rate:          235.09 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     1    1   0.3      1      16
-Waiting:        0    1   0.3      1      16
-Total:          1    2   0.3      1      16
-ERROR: The median and mean for the total time are more than twice the standard
-       deviation apart. These results are NOT reliable.
+Processing:     1    2   0.3      2      13
+Waiting:        0    1   0.3      1      13
+Total:          1    2   0.3      2      13
 
 Percentage of the requests served within a certain time (ms)
-  50%      1
+  50%      2
   66%      2
   75%      2
   80%      2
@@ -42,4 +40,4 @@ Percentage of the requests served within a certain time (ms)
   95%      2
   98%      2
   99%      2
- 100%     16 (longest request)
+ 100%     13 (longest request)

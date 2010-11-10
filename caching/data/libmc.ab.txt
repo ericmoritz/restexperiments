@@ -13,23 +13,23 @@ Document Path:          /libmc
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   21.931 seconds
+Time taken for tests:   21.509 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      2980000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    455.98 [#/sec] (mean)
-Time per request:       2.193 [ms] (mean)
-Time per request:       2.193 [ms] (mean, across all concurrent requests)
-Transfer rate:          132.70 [Kbytes/sec] received
+Requests per second:    464.91 [#/sec] (mean)
+Time per request:       2.151 [ms] (mean)
+Time per request:       2.151 [ms] (mean, across all concurrent requests)
+Transfer rate:          135.30 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     1    2   0.3      2      16
-Waiting:        0    1   0.2      1      15
-Total:          2    2   0.3      2      16
+Connect:        0    0   0.0      0       1
+Processing:     2    2   0.2      2      15
+Waiting:        0    1   0.2      1      13
+Total:          2    2   0.2      2      15
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -40,4 +40,4 @@ Percentage of the requests served within a certain time (ms)
   95%      2
   98%      3
   99%      3
- 100%     16 (longest request)
+ 100%     15 (longest request)

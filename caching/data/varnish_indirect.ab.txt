@@ -13,23 +13,23 @@ Document Path:          /varnish_indirect
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   19.760 seconds
+Time taken for tests:   19.404 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      2840000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    506.06 [#/sec] (mean)
-Time per request:       1.976 [ms] (mean)
-Time per request:       1.976 [ms] (mean, across all concurrent requests)
-Transfer rate:          140.35 [Kbytes/sec] received
+Requests per second:    515.36 [#/sec] (mean)
+Time per request:       1.940 [ms] (mean)
+Time per request:       1.940 [ms] (mean, across all concurrent requests)
+Transfer rate:          142.93 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.1      0       1
-Processing:     2    2   0.2      2      14
-Waiting:        0    1   0.6      1      14
-Total:          2    2   0.2      2      14
+Connect:        0    0   0.0      0       1
+Processing:     2    2   0.3      2      16
+Waiting:        0    1   0.5      1      15
+Total:          2    2   0.3      2      16
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -38,6 +38,6 @@ Percentage of the requests served within a certain time (ms)
   80%      2
   90%      2
   95%      2
-  98%      3
+  98%      2
   99%      3
- 100%     14 (longest request)
+ 100%     16 (longest request)

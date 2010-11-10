@@ -9,27 +9,27 @@ Server Software:        PasteWSGIServer/0.5
 Server Hostname:        localhost
 Server Port:            10001
 
-Document Path:          /ajax.html
-Document Length:        127 bytes
+Document Path:          /esi.tmpl
+Document Length:        101 bytes
 
 Concurrency Level:      1
-Time taken for tests:   2.063 seconds
+Time taken for tests:   2.113 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Total transferred:      4150000 bytes
-HTML transferred:       1270000 bytes
-Requests per second:    4847.50 [#/sec] (mean)
-Time per request:       0.206 [ms] (mean)
-Time per request:       0.206 [ms] (mean, across all concurrent requests)
-Transfer rate:          1964.56 [Kbytes/sec] received
+Total transferred:      3920000 bytes
+HTML transferred:       1010000 bytes
+Requests per second:    4731.92 [#/sec] (mean)
+Time per request:       0.211 [ms] (mean)
+Time per request:       0.211 [ms] (mean, across all concurrent requests)
+Transfer rate:          1811.44 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     0    0   0.1      0       7
-Waiting:        0    0   0.0      0       1
-Total:          0    0   0.1      0       7
+Processing:     0    0   0.1      0      10
+Waiting:        0    0   0.1      0      10
+Total:          0    0   0.1      0      10
 
 Percentage of the requests served within a certain time (ms)
   50%      0
@@ -40,4 +40,4 @@ Percentage of the requests served within a certain time (ms)
   95%      0
   98%      0
   99%      0
- 100%      7 (longest request)
+ 100%     10 (longest request)
