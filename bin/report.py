@@ -5,8 +5,10 @@ from glob import glob
 from decimal import Decimal
 data = defaultdict(dict)
 
-for filename in glob("data/*.ab.txt"):
-    case = filename[len("data/"):len(".ab.txt")*-1]
+root = sys.argv[1]
+
+for filename in glob(root+"*.ab.txt"):
+    case = filename[len(root):len(".ab.txt")*-1]
 
     with open(filename) as fh:
         for line in fh:
