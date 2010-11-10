@@ -13,6 +13,10 @@ function assertequal {
 # Precache the resources
 assertequal "$(curl http://localhost:10001/spouse)" "Gina Moritz"
 assertequal "$(curl http://localhost:10001/children)" "Aiden Moritz,Ethan Moritz"
+assertequal "$(curl http://localhost:8000/spouse)" "Gina Moritz"
+assertequal "$(curl http://localhost:8000/children)" "Aiden Moritz,Ethan Moritz"
+assertequal "$(curl http://localhost:8000/mw_spouse)" "Gina Moritz"
+assertequal "$(curl http://localhost:8000/mw_children)" "Aiden Moritz,Ethan Moritz"
 
 # Test the Internal Data Caching methods
 for i in control memcache libmc simple middleware; do
