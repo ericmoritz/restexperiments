@@ -1,6 +1,6 @@
 rm results/*
 
-SAMPLE_SIZE=10000
+SAMPLE_SIZE=$1
 function assertequal {
     if [ "$1" != "$2" ]; then
 	echo "Got \"$1\""
