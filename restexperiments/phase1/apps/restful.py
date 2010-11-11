@@ -1,6 +1,6 @@
 from restexperiments.core import db
 from restexperiments.core.client import GET
-
+from webob import Request
 
 def spouse(environ, start_response):
     spouse = db.get_spouse()
@@ -10,7 +10,7 @@ def spouse(environ, start_response):
 
 
 def children(environ, start_response):
-    children = db.get_spouse()
+    children = db.get_children()
     start_response("200 OK", [("Content-Type", "text/plain")])
 
     return [",".join(children)]
@@ -30,18 +30,24 @@ def direct_family(environ, start_response):
 
 
 def indirect_family(environ, start_response):
-    url = environ['routes.url']
+    req = Request(environ)
 
-    spouse = GET(url("spouse"))
-    children = GET(url("children"))
-    return [render(spouse, children)]
+    spouse_uri = "http://localhost:8000/phase1/restful/spouse"
+    children_uri = "http://localhost:8000/phase1/restful/children"
+
+    spouse = GET(spouse_uri)
+    children = GET(children_uri)
+    start_response("200 OK", [("Content-Type", "text/plain")])
+    return ["%s;%s" % (spouse, children)]
 
 
 def esi_family(environ, start_response):
-    url = environ['routes.url']
+    req = Request(environ)
 
-    spouse_uri = url("restful/spouse")
-    children_uri = url("restful/children")
+    spouse_uri = "http://localhost:8000/phase1/restful/spouse"
+    children_uri = "http://localhost:8000/phase1/restful/children"
 
-    return '<esi:include src="%s" />;<esi:include src="%s" />' %\
-        (spouse_uri, children_uri)
+
+    start_response("200 OK", [("Content-Type", "text/plain")])
+    return ['<esi:include src="%s" />;<esi:include src="%s" />' %\
+        (spouse_uri, children_uri)]
