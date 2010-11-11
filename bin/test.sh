@@ -32,13 +32,26 @@ function benchmark {
 function phase1 {
     SAMPLESIZE=$1
 
-    mkdir results/phase1
+    mkdir -p results/phase1
     rm results/phase1/*
 
     benchmark "phase1" "control" \
         "http://localhost:8000/phase1/control" \
         "$SAMPLESIZE" \
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+
+    benchmark "phase1" "spouse" \
+        "http://localhost:8000/phase1/restful/spouse" \
+        "$SAMPLESIZE" \
+        "Gina Moritz"
+
+    benchmark "phase1" "children" \
+        "http://localhost:8000/phase1/restful/children" \
+        "$SAMPLESIZE" \
+        "Aiden Moritz,Ethan Moritz"
+
+
 
     benchmark "phase1" "traditional-direct" \
         "http://localhost:8000/phase1/conventional/direct/family" \
@@ -49,7 +62,19 @@ function phase1 {
         "http://localhost:8000/phase1/restful/direct/family" \
         "$SAMPLESIZE" \
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+    benchmark "phase1" "restful-indirect" \
+        "http://localhost:8000/phase1/restful/indirect/family" \
+        "$SAMPLESIZE" \
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+    benchmark "phase1" "restful-esi" \
+        "http://localhost:10001/phase1/restful/esi/family" \
+        "$SAMPLESIZE" \
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
 }
 
 SAMPLESIZE=$1
+
 phase1 $SAMPLESIZE
