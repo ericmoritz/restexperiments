@@ -2,20 +2,36 @@ from webob import exc
 
 
 class FrontController(object):
-    def __init__(self, **resource_map):
-        self.resource_map = resource_map
+    def __init__(self, *resources):
+        self.resources = resources
 
     def __call__(self, environ, start_response):
-        match = environ['wsgiorg.routing_args'][1]
+        # This selector is used to create a consistant
+        # overhead for each resource
+        apps = [a for prefix, a in self.resources
+                   if environ['PATH_INFO'].startswith(prefix)]
 
-        if match is None or "resource" not in match:
-            return exc.HTTPNotFound()(environ, start_response)
+        if len(apps) == 0:
+            msg = "%s %s" % (environ['SCRIPT_NAME'], environ['PATH_INFO'], )
+            msg +="\nTried %r" % [prefix for prefix, app in self.resources]
 
-        app = self.resource_map[match['resource']]
+            return exc.HTTPNotFound(msg)(environ, start_response)            
+
+        app = apps[0]
+        script_name = environ.get('SCRIPT_NAME', '')
+        environ['SCRIPT_NAME'] = script_name + prefix
+        environ['PATH_INFO'] = environ['PATH_INFO'][len(prefix):]
+
         return app(environ, start_response)
 
 
+
 def serve(application):
-    from paste.httpserver import serve
-    serve(application, host="127.0.0.1",
-          port=8000)
+    #from paste.httpserver import serve
+    #serve(application, host="127.0.0.1",
+    #      port=8000)
+
+    from wsgiref.simple_server import make_server
+    httpd = make_server('', 8000, application)
+    print "Serving on port 8000..."
+    httpd.serve_forever()
