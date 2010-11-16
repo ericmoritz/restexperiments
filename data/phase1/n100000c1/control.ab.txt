@@ -9,29 +9,28 @@ Server Software:        nginx/0.8.53
 Server Hostname:        localhost
 Server Port:            8000
 
-Document Path:          /phase1/restful/direct/family
+Document Path:          /phase1/control
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   6.453 seconds
-Complete requests:      10000
+Time taken for tests:   66.276 seconds
+Complete requests:      100000
 Failed requests:        0
 Write errors:           0
-Total transferred:      3420000 bytes
-HTML transferred:       370000 bytes
-Requests per second:    1549.71 [#/sec] (mean)
-Time per request:       0.645 [ms] (mean)
-Time per request:       0.645 [ms] (mean, across all concurrent requests)
-Transfer rate:          517.58 [Kbytes/sec] received
+Keep-Alive requests:    0
+Total transferred:      34200000 bytes
+HTML transferred:       3700000 bytes
+Requests per second:    1508.85 [#/sec] (mean)
+Time per request:       0.663 [ms] (mean)
+Time per request:       0.663 [ms] (mean, across all concurrent requests)
+Transfer rate:          503.93 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     0    1   0.1      1       9
-Waiting:        0    1   0.1      0       9
-Total:          1    1   0.1      1       9
-ERROR: The median and mean for the waiting time are more than twice the standard
-       deviation apart. These results are NOT reliable.
+Processing:     0    1   0.3      1     100
+Waiting:        0    1   0.3      1     100
+Total:          0    1   0.3      1     100
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -42,4 +41,4 @@ Percentage of the requests served within a certain time (ms)
   95%      1
   98%      1
   99%      1
- 100%      9 (longest request)
+ 100%    100 (longest request)

@@ -9,27 +9,28 @@ Server Software:        nginx/0.8.53
 Server Hostname:        localhost
 Server Port:            8000
 
-Document Path:          /phase1/restful/spouse
-Document Length:        11 bytes
+Document Path:          /phase1/restful/children
+Document Length:        25 bytes
 
 Concurrency Level:      1
-Time taken for tests:   6.302 seconds
-Complete requests:      10000
+Time taken for tests:   66.472 seconds
+Complete requests:      100000
 Failed requests:        0
 Write errors:           0
-Total transferred:      3160000 bytes
-HTML transferred:       110000 bytes
-Requests per second:    1586.82 [#/sec] (mean)
-Time per request:       0.630 [ms] (mean)
-Time per request:       0.630 [ms] (mean, across all concurrent requests)
-Transfer rate:          489.68 [Kbytes/sec] received
+Keep-Alive requests:    0
+Total transferred:      33000000 bytes
+HTML transferred:       2500000 bytes
+Requests per second:    1504.39 [#/sec] (mean)
+Time per request:       0.665 [ms] (mean)
+Time per request:       0.665 [ms] (mean, across all concurrent requests)
+Transfer rate:          484.81 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     0    1   0.1      1       2
-Waiting:        0    0   0.1      0       1
-Total:          0    1   0.1      1       2
+Processing:     0    1   0.2      1      22
+Waiting:        0    1   0.2      1      22
+Total:          0    1   0.2      1      22
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -40,4 +41,4 @@ Percentage of the requests served within a certain time (ms)
   95%      1
   98%      1
   99%      1
- 100%      2 (longest request)
+ 100%     22 (longest request)

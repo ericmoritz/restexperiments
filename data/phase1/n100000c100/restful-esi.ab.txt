@@ -1,0 +1,44 @@
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        nginx/0.8.53
+Server Hostname:        localhost
+Server Port:            10001
+
+Document Path:          /phase1/restful/esi/family
+Document Length:        37 bytes
+
+Concurrency Level:      100
+Time taken for tests:   167.095 seconds
+Complete requests:      100000
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    0
+Total transferred:      39100000 bytes
+HTML transferred:       3700000 bytes
+Requests per second:    598.46 [#/sec] (mean)
+Time per request:       167.095 [ms] (mean)
+Time per request:       1.671 [ms] (mean, across all concurrent requests)
+Transfer rate:          228.51 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0      10
+Processing:     2  167 191.1    105    3138
+Waiting:        0    3  11.0      2     624
+Total:          2  167 191.1    105    3138
+
+Percentage of the requests served within a certain time (ms)
+  50%    105
+  66%    165
+  75%    217
+  80%    257
+  90%    398
+  95%    542
+  98%    752
+  99%    915
+ 100%   3138 (longest request)
