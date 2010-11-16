@@ -3,6 +3,10 @@ import sys
 from collections import defaultdict
 from glob import glob
 from decimal import Decimal
+import os
+import json
+
+
 data = defaultdict(dict)
 
 root = sys.argv[1]
@@ -15,9 +19,9 @@ for filename in glob(root+"*.ab.txt"):
             if "Requests per second:" in line:
                 key, value = line.split(":")
                 data[case]["rps"] = value.strip().split(" ")[0]
-            elif "Time per request:" in line and "(mean)" in line:
+            elif "Time per request:" in line and "(mean," in line:
                 key, value = line.split(":")
-                data[case]["tps"] = value.strip().split(" ")[0]
+                data[case]["tpr"] = value.strip().split(" ")[0]
                 
 
 
@@ -50,6 +54,14 @@ def print_table(key_label, value_label, control, items):
 
 control = data['control']
 
+result = {
+    'type': os.path.basename(os.path.dirname(root)),
+    'cases': data
+}
+
+print json.dumps(result)
+sys.exit()
+
 rps_result = [(case, d["rps"]) for case, d in data.items()]
 rps_result.sort(key=lambda item: float(item[1]), reverse=True)
 
@@ -57,8 +69,8 @@ print_table("Case", "Requests per second", control['rps'], rps_result)
 
 print
 
-# sorry I couldn't resist using tps_report...
-tps_report = [(case, d["tps"]) for case, d in data.items()]
-tps_report.sort(key=lambda item: float(item[1]))
+tpr_result = [(case, d["tpr"]) for case, d in data.items()]
+tpr_result.sort(key=lambda item: float(item[1]))
 
 print_table("Case", "Time(ms) per request", control['tps'], tps_report)
+
