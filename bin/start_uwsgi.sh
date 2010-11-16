@@ -4,4 +4,4 @@ if [ -e pid/uwsgi.pid ]; then
     sleep 0.5
 fi
 
-./bin/uwsgi --pidfile pid/uwsgi.pid -s sock/uwsgi.sock -i -H `pwd`/ -t 5 -M -p 4 -z 30 -l 500 -L  --module restexperiments.app
+./bin/uwsgi --pidfile pid/uwsgi.pid -s sock/uwsgi.sock -i -H `pwd`/ -t 5 -M -z 30 -l 500 -L  --module restexperiments.app
