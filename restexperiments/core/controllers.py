@@ -9,10 +9,10 @@ class FrontController(object):
         # This selector is used to create a consistant
         # overhead for each resource
         apps = [a for prefix, a in self.resources
-                   if environ['PATH_INFO'].startswith(prefix)]
+                   if environ.get('PATH_INFO', '').startswith(prefix)]
 
         if len(apps) == 0:
-            msg = "%s %s" % (environ['SCRIPT_NAME'], environ['PATH_INFO'], )
+            msg = "%s %s" % (environ.get('SCRIPT_NAME',''), environ.get('PATH_INFO', ''), )
             msg +="\nTried %r" % [prefix for prefix, app in self.resources]
 
             return exc.HTTPNotFound(msg)(environ, start_response)            
@@ -20,7 +20,7 @@ class FrontController(object):
         app = apps[0]
         script_name = environ.get('SCRIPT_NAME', '')
         environ['SCRIPT_NAME'] = script_name + prefix
-        environ['PATH_INFO'] = environ['PATH_INFO'][len(prefix):]
+        environ['PATH_INFO'] = environ.get('PATH_INFO', '')[len(prefix):]
 
         return app(environ, start_response)
 
