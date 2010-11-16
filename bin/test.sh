@@ -16,7 +16,7 @@ function benchmark {
     CONCURRENCY=$5
     EXPECT=$6
 
-    BASE="results/$EXPERIMENT/$TESTNAME"
+    BASE="results/$EXPERIMENT/n${SAMPLESIZE}c${CONCURRENCY}/$TESTNAME"
 
     echo "Testing $TESTNAME $SAMPLESIZE $CONCURRENCY"
     echo "Download $URI"
@@ -27,7 +27,7 @@ function benchmark {
         assertequal "$(cat $BASE.out)" "$EXPECT"
     fi
     echo "Benchmarking $URI"
-    ab -n "$SAMPLESIZE" "-c$CONCURRENCY" "$URI" > "$BASE.ab.txt"
+    ab -k -n "$SAMPLESIZE" "-c$CONCURRENCY" "$URI" > "$BASE.ab.txt"
 
 }
 
@@ -36,8 +36,8 @@ function phase1 {
     SAMPLESIZE=$1
     CONCURRENCY=$2
 
-    mkdir -p results/phase1
-    rm results/phase1/*
+    mkdir -p "results/phase1/n${SAMPLESIZE}c${CONCURRENCY}/"
+    rm "results/phase1/n${SAMPLESIZE}c${CONCURRENCY}/*"
 
     echo "sample: $SAMPLESIZE concurrency: $CONCURRENCY" > results/phase1/config.txt
 
@@ -76,12 +76,13 @@ function phase1 {
 	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
-    benchmark "phase1"\
-        "restful-indirect"\
-        "http://localhost:8000/phase1/restful/indirect/family"\
-        "$SAMPLESIZE"\
-	"$CONCURRENCY"\
-        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+    #benchmark "phase1"\
+    #    "restful-indirect"\
+    #    "http://localhost:8000/phase1/restful/indirect/family"\
+    #    "$SAMPLESIZE"\
+    #    "$CONCURRENCY"\
+    #    "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
 
     benchmark "phase1"\
 	"restful-esi"\
@@ -90,9 +91,11 @@ function phase1 {
 	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
+
 }
 
-SAMPLESIZE=$1
-CONCURRENCY=$2
+phase1 100000 1
+phase1 100000 10
+phase1 100000 100
+phase1 100000 1000
 
-phase1 $SAMPLESIZE $CONCURRENCY
