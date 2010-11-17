@@ -53,7 +53,7 @@ To calculate the effort on the server I will use the following formula::
 Because a browser would fetch the resources asynchronously, the actual
 time needed for the spouse and children resources would be between::
 
-    (spouse_tpr + children_tpr) / 2 <= x <= (spouse_tpr + children_tpr)
+    (spouse_tpr + children_tpr) / 2 < x < (spouse_tpr + children_tpr)
 
 For sake of argument, I am going to err on the side of caution and use
 the worse case of (spouse_tpr + children_tpr)
@@ -62,7 +62,7 @@ Once I calculate the total time per request for all resources, I can
 extrapolate the requests per second throughput of the AJAX collation
 using the following formula::
 
-1 / tpr * 1000 = rps
+    1 / tpr * 1000 = rps
 
 This is simply converting time(ms) per request to requests per second
 
@@ -96,22 +96,59 @@ Each implementation must produce the following response::
 
 Methodology
 ------------
+A new Rackspace Cloud VPS running Ubuntu 10.10 was created for a clean
+room environment.  I ran the following to initialize the server::
 
-Benchmark the URIs using Apache Bench with a sample size of 10,000
-requests::
+    git clone git://github.com/ericmoritz/restexperiments.git
+    cd restexperiments
+    git checkout simplified
+    ./bin/ubuntu-10-10-build.sh    
 
-    ab -n10000 -c1 $URI
+NGINX and UWSGI are configured using one worker each to serve a WSGI
+application that provides each implementation mounted at the URIs
+described above.  This HTTP/WSGI stack was chosen based on the
+conclusions made by
+`Nicholas Piël <http://nichol.as/benchmark-of-python-web-servers>`_
+in his benchmarks of HTTP/WSGI solutions.  I do not need to recreate
+his tests so I chose the clear winner from his tests.
 
+Varnish is used in front of the HTTP/WSGI stack to enable ESI
+templating.
+
+The ./bin/startservers.sh script is used to configure the server for
+high concurrency as described by 
+`Nicholas Piël <http://nichol.as/benchmark-of-python-web-servers>`_
+and to launch the needed servers.
+
+Apache Bench was used to benchmark the URIs at a sample size of
+10,000 and concurrency levels between 1 and 1,000 stepping 250
+connections for each iteration::
+
+    ab -n10000 -c1    $URI
+    ab -n10000 -c250  $URI
+    ab -n10000 -c500  $URI
+    ab -n10000 -c1000 $URI
+
+The ./bin/test.sh was created to automate the testing of phase1.  The
+output of Apache Bench is stored in results/phase1.  The result of my
+tests are stored at data/phase1 in the repository.
+
+The bin/generate_csv.sh script was used to generate a CSV file for the
+charts below.
 
 Results
 --------
 
 I had to disqualify the RESTful indirect method because I could not
 test it using a single worker thread.  The implications of that is
-that the number of concurrent requests is limited to (workers)/3. To
-accomplish 250 concurrent requests, I would have to have 750 worker
-processes for both nginx and uwsgi.  The resident memory would end up
-being 12gigs.
+that the number of concurrent requests is limited to (workers)/3. 
+
+This makes a concurrency level of 1 require 3 workers; a concurrency
+level of 2 require 6 workers, and so on.
+
+To accomplish the second tier of testing at 250 concurrent requests, I
+would have to have 750 worker processes for both nginx and uwsgi.  The
+resident memory would end up being 12gigs.
 
 .. raw:: html
 
