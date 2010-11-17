@@ -1,7 +1,7 @@
 Phase 1
 ===============
 
-In phase on I need to present my family profile to the world
+In phase 1 I need to present my family profile to the world
 
 Solutions
 ----------
@@ -39,16 +39,22 @@ resources outside of the application.
 
 Client Side
 ^^^^^^^^^^^^
+
 Fetches code that describes how to fetch the needed data and combine
 them on the client.  This is essentially the "AJAX" method.  In AJAX,
 an HTML file is downloaded that includes the needed Javascript to
 fetch the /spouse and /children and combine them into a single piece
-of data.  This is essentially what the ESI implementation is doing.
+of data.  
 
-Varnish is acting as the client.  It fetches the ESI template and
-parses it, then fetches the two resources it's needs to generate the
-final response.  In this experiment.  I am going to consider ESI the
-same as client side rendering.
+To calculate the effort on the server I will use the following formula::
+
+   control_tpr + (spouse_tpr + children_tpr) / 2
+
+The time of /spouse and /children is averaged because the browser can 
+asynchronously fetch the two resources.  From that value I can
+extrapolate the requests per second throughput of the AJAX collation::
+
+    1 / tpr * 1000 = rps
 
 
 Hypothesis
@@ -93,10 +99,10 @@ Results
 
 I had to disqualify the RESTful indirect method because I could not
 test it using a single worker thread.  The implications of that is
-that the number of concurrent requests is limited to (workers)/3 to
-accomplish even 250 concurrent requests, I would have to have 750
-worker processes for both nginx and uwsgi.  The resident memory would
-end up being 12gigs.
+that the number of concurrent requests is limited to (workers)/3. To
+accomplish 250 concurrent requests, I would have to have 750 worker
+processes for both nginx and uwsgi.  The resident memory would end up
+being 12gigs.
 
 .. raw:: html
 
@@ -128,21 +134,15 @@ kind of overhead ESI adds for more complicated templates.
 
 Comparing ESI to direct access is probably a bit unfair because ESI is
 doing much more than the Python string format template does for the 
-direct responses.  I would suspect that a more accurate comparison
-would be to sum the TPR for the three URIs needed to composite the 
-resources:
+direct responses.  I would suspect that the values for AJAX would be 
+a fairer comparison.
 
-* http://localhost:8000/phase1/restful/esi/family
-* http://localhost:8000/phase1/restful/spouse
-* http://localhost:8000/phase1/restful/children
+I think that it is safe for me to conclude that if server data needs
+to be collated on the server, accessing the data directly would be
+best.
 
-A rough estimate would put time need to gather the content to
-composite at around 0.87ms.  That would still be three times the time
-needed for direct access.
-
-I think It is safe for me to conclude that if server data needs to be
-collated on the server, accessing the data directly would be best.
-
-The benefits to edge side or client side collation would be
-a bit more flexibility.
-
+That being said, you gain flexibility when using edge side and client
+side collating.  If you ignore database limitations, you could
+theoretically gain the throughput of the direct method by horizontally
+scaling the servers but that would require more system resources
+(which may be cheap enough to justify).
