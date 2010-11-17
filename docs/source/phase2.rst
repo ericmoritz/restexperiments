@@ -1,34 +1,46 @@
-[Title]
+Phase 2
 ===============
 
-[Explain problem that needs to be solved]
-
-Solutions
-----------
-[List solutions to the problem]
-
-Hypothesis
------------
-
-[Theorize what the outcome will be]
-
-
-Test Cases
------------
-
-[List out how each solution was implemented]
+Oh No! My database has started sucking.  It is now taking 10ms for
+every query. What Am I to do?
 
 Methodology
 ------------
 
-[Explain the methodology used to test the solutions]
+Ran the same test as phase1 but with a time.sleep(0.01) before each
+access to the spouse and children data.
 
 Results
 --------
 
-[Present analyzed data]
+This test establishes a baseline for optimizing access to slow queries
+
+.. raw:: html
+
+  <script
+    src="_static/highcharts.js"
+    type="text/javascript"></script>
+  <script
+    src="_static/csvchart.js"
+    type="text/javascript"></script>
+  <script
+    src="_static/phase2.js"
+    type="text/javascript"></script>
+
+
+  <div id="phase2-rps-chart"></div>
+
+  <div id="phase2-tpr-chart"></div>
+
 
 Conclusion
 -----------
 
-[Present you conclusion]
+When realistic load is applied the individual implementation end up
+becomes normalized.  The sub-millisecond differences become
+negligible.
+
+Unfortunately, when there is load, Varnish has trouble accepting
+connections between the 750-1000 concurrency levels.  These are high
+concurrency levels and it's likely you would load balance the servers
+before you reach those levels.
