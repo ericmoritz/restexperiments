@@ -47,8 +47,8 @@ I need to present my family profile to the world. `Results <phase1>`_
 Phase Two
 ---------
 
-Oh no! my data source has proved to be too slow for the public.
-I will have cache my data. `Results <phase2>`_
+Oh no! my database has started sucking.  It's now taking 10ms per db record
+Let's see how my application has faired. `Results <phase2>`_
 
 Contents:
 
