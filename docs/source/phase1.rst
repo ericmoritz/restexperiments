@@ -91,12 +91,58 @@ requests::
 Results
 --------
 
-[Present analyzed data]
+I had to disqualify the RESTful indirect method because I could not
+test it using a single worker thread.  The implications of that is
+that the number of concurrent requests is limited to (workers)/3 to
+accomplish even 250 concurrent requests, I would have to have 750
+worker processes for both nginx and uwsgi.  The resident memory would
+end up being 12gigs.
+
+.. raw:: html
+
+  <script
+    src="_static/highcharts.js"
+    type="text/javascript"></script>
+  <script
+    src="_static/csvchart.js"
+    type="text/javascript"></script>
+  <script
+    src="_static/phase1.js"
+    type="text/javascript"></script>
+
+
+  <div id="phase1-rps-chart"></div>
+
+  <div id="phase1-tpr-chart"></div>
 
 Conclusion
 -----------
 
-[Present you conclusion]
+It is obvious that accessing the data directly would produce the
+quickest result. It is the implementation with the fewest moving parts.
 
+ESI's overhead was surprising.  If you subtract the mean time per
+request for the spouse and children resource you will find that the
+ESI collating added 1ms of overhead.  I'd be interested to see what
+kind of overhead ESI adds for more complicated templates.
 
+Comparing ESI to direct access is probably a bit unfair because ESI is
+doing much more than the Python string format template does for the 
+direct responses.  I would suspect that a more accurate comparison
+would be to sum the TPR for the three URIs needed to composite the 
+resources:
+
+* http://localhost:8000/phase1/restful/esi/family
+* http://localhost:8000/phase1/restful/spouse
+* http://localhost:8000/phase1/restful/children
+
+A rough estimate would put time need to gather the content to
+composite at around 0.87ms.  That would still be three times the time
+needed for direct access.
+
+I think It is safe for me to conclude that if server data needs to be
+collated on the server, accessing the data directly would be best.
+
+The benefits to edge side or client side collation would be
+a bit more flexibility.
 
