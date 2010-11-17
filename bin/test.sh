@@ -94,8 +94,9 @@ function phase1 {
 
 }
 
-phase1 100000 1
-phase1 100000 10
-phase1 100000 100
-phase1 100000 1000
+phase1 10000 1
+phase1 10000 250
+phase1 10000 500
+phase1 10000 750
+phase1 10000 1000
 
