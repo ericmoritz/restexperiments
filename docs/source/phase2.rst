@@ -36,11 +36,11 @@ This test establishes a baseline for optimizing access to slow queries
 Conclusion
 -----------
 
-When realistic load is applied the individual implementation end up
+When realistic load is applied the individual implementations end up
 becomes normalized.  The sub-millisecond differences become
 negligible.
 
-Unfortunately, when there is load, Varnish has trouble accepting
+There is bad news. When there is load, Varnish has trouble accepting
 connections between the 750-1000 concurrency levels.  These are high
 concurrency levels and it's likely you would load balance the servers
-before you reach those levels.
+before you reach those levels.  I am not certain why this is the case.
