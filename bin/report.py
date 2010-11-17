@@ -31,7 +31,7 @@ spouse_tpr = Decimal(data['spouse']['tpr'])
 children_tpr = Decimal(data['children']['tpr'])
 
 data['ajax'] = {}
-data['ajax']['tpr'] = control_tpr + (spouse_tpr + children_tpr) / 2
+data['ajax']['tpr'] = control_tpr + spouse_tpr + children_tpr
 data['ajax']['rps'] = 1 / data['ajax']['tpr'] * 1000
 
 
