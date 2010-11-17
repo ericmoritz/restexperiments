@@ -6,18 +6,20 @@ import re
 type_pat = re.compile("n(\d+)c(\d+)")
 
 data = defaultdict(dict)
-levels = {}
+levels = set()
      
 for line in sys.stdin:
     result = json.loads(line)
     for case, val in result['cases'].items():
         data[case][result['type']] = val
-        levels[result['type']] = 1
+        type_key = result['type']
+        m = type_pat.match(type_key)
+        concurrency = m.group(2)
+        levels.add((type_key, int(concurrency)))
 
 # pull out the concurrency level out of the test type
-levels = sorted(levels.keys())
-
-concurrency = (m.group(2) for m in map(type_pat.match, levels))
+levels = sorted(levels, key=lambda x: x[1])
+concurrency = (unicode(l[1]) for l in levels)
 print "Case, " + ",".join(concurrency)
 
 if len(sys.argv) == 1:
@@ -30,8 +32,8 @@ else:
 
 for case, values in data.items():
     row = [case]
-    for level in levels:
-        result = values.get(level, {})
+    for key, concurrency in levels:
+        result = values.get(key, {})
         row.append(result.get(result_type, "0"))
 
     print ",".join(row)
