@@ -42,13 +42,13 @@ This profile is the homepage of my application.
 Phase One
 ---------
 
-I need to present my family profile to the world. `Results <phase1>`_
+I need to present my family profile to the world.
 
 Phase Two
 ---------
 
 Oh no! my database has started sucking.  It's now taking 10ms per db record
-Let's see how my application has faired. `Results <phase2>`_
+Let's see how my application has faired.
 
 Contents:
 
