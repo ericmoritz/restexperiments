@@ -32,61 +32,62 @@ function benchmark {
 }
 
 # The phase one benchmarking
-function phase1 {
-    SAMPLESIZE=$1
-    CONCURRENCY=$2
+function base_app_test {
+    PHASE=$1
+    SAMPLESIZE=$2
+    CONCURRENCY=$3
 
-    mkdir -p "results/phase1/n${SAMPLESIZE}c${CONCURRENCY}/"
-    rm "results/phase1/n${SAMPLESIZE}c${CONCURRENCY}/*"
+    mkdir -p "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/"
+    rm "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/*"
 
-    echo "sample: $SAMPLESIZE concurrency: $CONCURRENCY" > results/phase1/config.txt
+    echo "sample: $SAMPLESIZE concurrency: $CONCURRENCY" > results/${PHASE}/config.txt
 
-    benchmark "phase1"\
+    benchmark "${PHASE}"\
         "control"\
-        "http://localhost:8000/phase1/control"\
-	"$SAMPLESIZE"\
-	"$CONCURRENCY"\
-	"Gina Moritz;Aiden Moritz,Ethan Moritz"
-
-    benchmark "phase1"\
-	"spouse"\
-        "http://localhost:8000/phase1/restful/spouse"\
+        "http://localhost:8000/${PHASE}/control"\
+    	"$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+    	"Gina Moritz;Aiden Moritz,Ethan Moritz"
+    
+    benchmark "${PHASE}"\
+    	"spouse"\
+        "http://localhost:8000/${PHASE}/restful/spouse"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Gina Moritz"
-
-    benchmark "phase1"\
-	"children"\
-        "http://localhost:8000/phase1/restful/children"\
+    
+    benchmark "${PHASE}"\
+    	"children"\
+        "http://localhost:8000/${PHASE}/restful/children"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Aiden Moritz,Ethan Moritz"
-
-    benchmark "phase1"\
-	"traditional-direct"\
-        "http://localhost:8000/phase1/conventional/direct/family"\
+    
+    benchmark "${PHASE}"\
+    	"traditional-direct"\
+        "http://localhost:8000/${PHASE}/conventional/direct/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
-    benchmark "phase1"\
+    
+    benchmark "${PHASE}"\
         "restful-direct"\
-        "http://localhost:8000/phase1/restful/direct/family"\
+        "http://localhost:8000/${PHASE}/restful/direct/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
-    #benchmark "phase1"\
-    #    "restful-indirect"\
-    #    "http://localhost:8000/phase1/restful/indirect/family"\
-    #    "$SAMPLESIZE"\
-    #    "$CONCURRENCY"\
-    #    "Gina Moritz;Aiden Moritz,Ethan Moritz"
+    benchmark "${PHASE}"\
+        "restful-indirect"\
+        "http://localhost:8000/${PHASE}/restful/indirect/family"\
+        "$SAMPLESIZE"\
+        "$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
 
-    benchmark "phase1"\
+    benchmark "${PHASE}"\
 	"restful-esi"\
-        "http://localhost:10001/phase1/restful/esi/family"\
+        "http://localhost:10001/${PHASE}/restful/esi/family"\
         "$SAMPLESIZE"\
 	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
@@ -94,9 +95,23 @@ function phase1 {
 
 }
 
+function phase1 {
+    base_app_test "phase1" $1 $2
+}
+
+function phase2 {
+    base_app_test "phase2" $1 $2
+}
+
 phase1 10000 1
 phase1 10000 250
 phase1 10000 500
 phase1 10000 750
 phase1 10000 1000
+
+phase2 10000 1
+phase2 10000 250
+phase2 10000 500
+phase2 10000 750
+phase2 10000 1000
 
