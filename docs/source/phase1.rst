@@ -48,14 +48,23 @@ of data.
 
 To calculate the effort on the server I will use the following formula::
 
-   control_tpr + (spouse_tpr + children_tpr) / 2
+   control_tpr + spouse_tpr + children_tpr
 
-The time of /spouse and /children is averaged because the browser can 
-asynchronously fetch the two resources.  From that value I can
-extrapolate the requests per second throughput of the AJAX collation::
+Because a browser would fetch the resources asynchronously, the actual
+time needed for the spouse and children resources would be between::
 
-    1 / tpr * 1000 = rps
+    (spouse_tpr + children_tpr) / 2 <= x <= (spouse_tpr + children_tpr)
 
+For sake of argument, I am going to err on the side of caution and use
+the worse case of (spouse_tpr + children_tpr)
+
+Once I calculate the total time per request for all resources, I can
+extrapolate the requests per second throughput of the AJAX collation
+using the following formula::
+
+1 / tpr * 1000 = rps
+
+This is simply converting time(ms) per request to requests per second
 
 Hypothesis
 -----------
