@@ -43,11 +43,11 @@ def indirect_family(environ, start_response):
 
 def esi_family(environ, start_response):
     req = Request(environ)
+    phase = environ['phase']
 
-    spouse_uri = "http://localhost:8000/phase1/restful/spouse"
-    children_uri = "http://localhost:8000/phase1/restful/children"
-
-
+    spouse_uri = "http://localhost:8000/%s/restful/spouse" % (phase,)
+    children_uri = "http://localhost:8000/%s/restful/children" % (phase,)
+    
     start_response("200 OK", [("Content-Type", "text/plain")])
     return ['<esi:include src="%s" />;<esi:include src="%s" />' %\
         (spouse_uri, children_uri)]
