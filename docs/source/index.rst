@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 REST vs The World
-=============================================
+====================
 
 Modern web applications have a number of requirements that both
 developers need and users need.  These experiments will compare
@@ -50,7 +50,9 @@ Phase Two
 Oh no! my database has started sucking.  It's now taking 10ms per db record
 Let's see how my application has faired.
 
-Contents:
+
+Contents
+===========
 
 .. toctree::
    :maxdepth: 2
