@@ -14,10 +14,12 @@ def add_latency(secs):
 
 # This middleware adds latency to the database calls
 class LatencyConfigMiddleware(object):
-    def __init__(self, app):
+    def __init__(self, phase, app):
         self.app = app
+        self.phase = phase
 
     def __call__(self, environ, start_response):
+        environ['phase'] = self.phase
         environ['get_spouse'] = add_latency(0.01)(db.get_spouse)
         environ['get_children'] = add_latency(0.01)(db.get_children)
     
@@ -26,17 +28,19 @@ class LatencyConfigMiddleware(object):
 # This middleware allows the database calls to be referenced in the
 # WSGI environment
 class ConfigMiddleware(object):
-    def __init__(self, app):
+    def __init__(self, phase, app):
         self.app = app
+        self.phase = phase
 
     def __call__(self, environ, start_response):
+        environ['phase'] = self.phase
         environ['get_spouse'] = db.get_spouse
         environ['get_children'] = db.get_children
 
         return self.app(environ, start_response)
 
-phase1 = ConfigMiddleware(base_app)
-phase2 = LatencyConfigMiddleware(base_app)
+phase1 = ConfigMiddleware("phase1", base_app)
+phase2 = LatencyConfigMiddleware("phase2", base_app)
 
 application = FrontController(
     ("/phase1", phase1),
