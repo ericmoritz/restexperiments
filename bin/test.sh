@@ -18,7 +18,7 @@ function benchmark {
 
     BASE="results/$EXPERIMENT/n${SAMPLESIZE}c${CONCURRENCY}/$TESTNAME"
 
-    echo "Testing $TESTNAME $SAMPLESIZE $CONCURRENCY"
+    echo "Testing $TESTNAME n$SAMPLESIZE c$CONCURRENCY"
     echo "Download $URI"
 
     curl "$URI" > "$BASE.out"
@@ -27,7 +27,7 @@ function benchmark {
         assertequal "$(cat $BASE.out)" "$EXPECT"
     fi
     echo "Benchmarking $URI"
-    ab -k -n "$SAMPLESIZE" "-c$CONCURRENCY" "$URI" > "$BASE.ab.txt"
+    ab "-n$SAMPLESIZE" "-c$CONCURRENCY" "$URI" > "$BASE.ab.txt"
 
 }
 
@@ -40,15 +40,6 @@ function base_app_test {
     mkdir -p "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/"
     rm "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/*"
 
-    echo "sample: $SAMPLESIZE concurrency: $CONCURRENCY" > results/${PHASE}/config.txt
-
-    benchmark "${PHASE}"\
-        "control"\
-        "http://localhost:8000/${PHASE}/control"\
-    	"$SAMPLESIZE"\
-    	"$CONCURRENCY"\
-    	"Gina Moritz;Aiden Moritz,Ethan Moritz"
-    
     benchmark "${PHASE}"\
     	"spouse"\
         "http://localhost:8000/${PHASE}/restful/spouse"\
@@ -93,6 +84,15 @@ function base_app_test {
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
 
+    benchmark "${PHASE}"\
+        "control"\
+        "http://localhost:8000/${PHASE}/control"\
+    	"$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+    	"Gina Moritz;Aiden Moritz,Ethan Moritz"
+    
+
+
 }
 
 function phase1 {
@@ -103,15 +103,69 @@ function phase2 {
     base_app_test "phase2" $1 $2
 }
 
-phase1 10000 1
-phase1 10000 250
-phase1 10000 500
-phase1 10000 750
-phase1 10000 1000
+function phase3 {
+    PHASE="phase3"
+    SAMPLESIZE=$1
+    CONCURRENCY=$2
 
-phase2 10000 1
-phase2 10000 250
-phase2 10000 500
-phase2 10000 750
-phase2 10000 1000
+    mkdir -p "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/"
+    rm "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/*"
+
+    benchmark "${PHASE}"\
+    	"convetional-memcached"\
+        "http://localhost:8000/${PHASE}/conventional/memcache,direct/family"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+    
+    benchmark "${PHASE}"\
+    	"spouse"\
+        "http://localhost:10001/${PHASE}/restful/spouse"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Gina Moritz"
+    
+    benchmark "${PHASE}"\
+    	"children"\
+        "http://localhost:10001/${PHASE}/restful/children"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Aiden Moritz,Ethan Moritz"
+    
+
+    benchmark "${PHASE}"\
+        "restful-direct"\
+        "http://localhost:10001/${PHASE}/restful/http,direct/family"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+    benchmark "${PHASE}"\
+	"restful-esi"\
+        "http://localhost:10001/${PHASE}/restful/http,esi/family"\
+        "$SAMPLESIZE"\
+	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+
+    benchmark "${PHASE}"\
+        "control"\
+        "http://localhost:8000/${PHASE}/control"\
+    	"$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+    	"Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+}
+
+function http-test-suite {
+    $1 10000 1
+    $1 10000 250
+    $1 10000 500
+    $1 10000 750
+    $1 10000 1000
+}
+
+http-test-suite phase1
+http-test-suite phase2
+http-test-suite phase3
 
