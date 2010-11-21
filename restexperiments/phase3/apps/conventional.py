@@ -1,8 +1,9 @@
+import memcache
+cache = memcache.Client(["127.0.0.1:11211"])
 
 
 def memcache_family(environ, start_response):
     # Here we get the current configuration from the WSGI environment
-    cache = environ['memcache_client']
     get_spouse = environ['get_spouse']
     get_children = environ['get_children']
     #
@@ -18,7 +19,7 @@ def memcache_family(environ, start_response):
         cache.set("spouse", spouse, 30)
     #
     # Here we fetch the children from the cache
-    children = cache.get("spouse")
+    children = cache.get("children")
     # If the children is not in the cache already, we get the children from the
     # database and update the cache
     if children is None:

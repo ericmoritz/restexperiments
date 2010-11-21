@@ -4,7 +4,7 @@ from apps import conventional, restful
 
 # The control is the best technique from phase2 to provide a baseline
 # of what an resources without caching looks like
-control = conventional.direct_family
+from restexperiments.phase1.apps.conventional import direct_family as control
 
 ###
 # Implementations
