@@ -13,31 +13,31 @@ Document Path:          /phase3/conventional/memcache,direct/family
 Document Length:        37 bytes
 
 Concurrency Level:      1000
-Time taken for tests:   2.988 seconds
+Time taken for tests:   3.049 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      1750000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    3346.58 [#/sec] (mean)
-Time per request:       298.812 [ms] (mean)
-Time per request:       0.299 [ms] (mean, across all concurrent requests)
-Transfer rate:          571.93 [Kbytes/sec] received
+Requests per second:    3280.27 [#/sec] (mean)
+Time per request:       304.853 [ms] (mean)
+Time per request:       0.305 [ms] (mean, across all concurrent requests)
+Transfer rate:          560.59 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    4  12.7      0      54
-Processing:    30  277  52.1    293     299
-Waiting:       28  277  52.2    293     299
-Total:         83  281  40.1    293     299
+Connect:        0    6  17.6      0      78
+Processing:    32  281  53.7    297     305
+Waiting:       29  281  53.8    297     305
+Total:        110  286  36.6    297     305
 
 Percentage of the requests served within a certain time (ms)
-  50%    293
-  66%    294
-  75%    295
-  80%    295
-  90%    296
-  95%    297
-  98%    297
-  99%    298
- 100%    299 (longest request)
+  50%    297
+  66%    299
+  75%    300
+  80%    300
+  90%    302
+  95%    303
+  98%    304
+  99%    305
+ 100%    305 (longest request)

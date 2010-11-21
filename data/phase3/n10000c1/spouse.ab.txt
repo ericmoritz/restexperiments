@@ -13,23 +13,23 @@ Document Path:          /phase3/restful/spouse
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   2.106 seconds
+Time taken for tests:   2.093 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Total transferred:      2968636 bytes
+Total transferred:      2960000 bytes
 HTML transferred:       110000 bytes
-Requests per second:    4748.84 [#/sec] (mean)
-Time per request:       0.211 [ms] (mean)
-Time per request:       0.211 [ms] (mean, across all concurrent requests)
-Transfer rate:          1376.72 [Kbytes/sec] received
+Requests per second:    4776.77 [#/sec] (mean)
+Time per request:       0.209 [ms] (mean)
+Time per request:       0.209 [ms] (mean, across all concurrent requests)
+Transfer rate:          1380.79 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     0    0   0.1      0      11
-Waiting:        0    0   0.1      0      11
-Total:          0    0   0.1      0      11
+Processing:     0    0   0.2      0      13
+Waiting:        0    0   0.0      0       1
+Total:          0    0   0.2      0      13
 
 Percentage of the requests served within a certain time (ms)
   50%      0
@@ -40,4 +40,4 @@ Percentage of the requests served within a certain time (ms)
   95%      0
   98%      0
   99%      0
- 100%     11 (longest request)
+ 100%     13 (longest request)

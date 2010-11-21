@@ -13,31 +13,31 @@ Document Path:          /phase3/control
 Document Length:        37 bytes
 
 Concurrency Level:      250
-Time taken for tests:   204.663 seconds
+Time taken for tests:   204.008 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Total transferred:      1750000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    48.86 [#/sec] (mean)
-Time per request:       5116.576 [ms] (mean)
-Time per request:       20.466 [ms] (mean, across all concurrent requests)
-Transfer rate:          8.35 [Kbytes/sec] received
+Requests per second:    49.02 [#/sec] (mean)
+Time per request:       5100.194 [ms] (mean)
+Time per request:       20.401 [ms] (mean, across all concurrent requests)
+Transfer rate:          8.38 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   1.7      0      14
-Processing:    21 5052 463.7   5125    5131
-Waiting:       21 5052 463.6   5125    5131
-Total:         35 5053 462.1   5125    5131
+Connect:        0    0   1.5      0      12
+Processing:    21 5036 461.6   5094    5131
+Waiting:       21 5036 461.6   5094    5131
+Total:         33 5037 460.2   5094    5131
 
 Percentage of the requests served within a certain time (ms)
-  50%   5125
-  66%   5127
-  75%   5127
-  80%   5128
-  90%   5129
-  95%   5129
-  98%   5130
+  50%   5094
+  66%   5121
+  75%   5123
+  80%   5124
+  90%   5126
+  95%   5128
+  98%   5129
   99%   5130
  100%   5131 (longest request)
