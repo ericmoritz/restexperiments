@@ -26,12 +26,12 @@ for filename in glob(glob_str):
                 
 
 # Calculate the AJAX value
-control_tpr = Decimal(data['control']['tpr'])
+#control_tpr = Decimal(data['ajax-template']['tpr'])
 spouse_tpr = Decimal(data['spouse']['tpr'])
 children_tpr = Decimal(data['children']['tpr'])
 
 data['ajax'] = {}
-data['ajax']['tpr'] = control_tpr + spouse_tpr + children_tpr
+data['ajax']['tpr'] = spouse_tpr + children_tpr
 data['ajax']['rps'] = 1 / data['ajax']['tpr'] * 1000
 
 

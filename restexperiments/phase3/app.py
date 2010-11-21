@@ -14,6 +14,7 @@ application = FrontController(
     ('/conventional/memcache,direct/family', conventional.memcache_family),
     ('/restful/spouse', cache_expires(30)(restful.spouse)),
     ('/restful/children', cache_expires(30)(restful.children)),
+    ('/restful/ajax/family', cache_expires(30)(restful.esi_family)),
     ('/restful/http,direct/family', cache_expires(30)(restful.direct_family)),
     ('/restful/http,esi/family', cache_expires(30)(restful.esi_family)),
 )
