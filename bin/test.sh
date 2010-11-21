@@ -39,7 +39,7 @@ function base_app_test {
 
     mkdir -p "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/"
     rm "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/*"
-
+    
     benchmark "${PHASE}"\
     	"spouse"\
         "http://localhost:8000/${PHASE}/restful/spouse"\
@@ -55,12 +55,13 @@ function base_app_test {
         "Aiden Moritz,Ethan Moritz"
     
     benchmark "${PHASE}"\
-	"ajax-template"\
+    	"ajax-template"\
         "http://localhost:8000/${PHASE}/restful/esi/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
-        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+    	"$CONCURRENCY"\
+        "<esi:include src=\"http://localhost:8000/$PHASE/restful/spouse\" />;<esi:include src=\"http://localhost:8000/$PHASE/restful/children\" />"
 
+    
     benchmark "${PHASE}"\
     	"traditional-direct"\
         "http://localhost:8000/${PHASE}/conventional/direct/family"\
@@ -74,23 +75,23 @@ function base_app_test {
         "$SAMPLESIZE"\
     	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
+    
     benchmark "${PHASE}"\
         "restful-indirect"\
         "http://localhost:8000/${PHASE}/restful/indirect/family"\
         "$SAMPLESIZE"\
         "$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
-
+    
+    
     benchmark "${PHASE}"\
-	"restful-esi"\
+    	"restful-esi"\
         "http://localhost:10001/${PHASE}/restful/esi/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
-
+    
+    
     benchmark "${PHASE}"\
         "control"\
         "http://localhost:8000/${PHASE}/control"\
@@ -117,7 +118,7 @@ function phase3 {
 
     mkdir -p "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/"
     rm "results/${PHASE}/n${SAMPLESIZE}c${CONCURRENCY}/*"
-
+    
     benchmark "${PHASE}"\
     	"convetional-memcached"\
         "http://localhost:8000/${PHASE}/conventional/memcache,direct/family"\
@@ -140,27 +141,27 @@ function phase3 {
         "Aiden Moritz,Ethan Moritz"
     
     benchmark "${PHASE}"\
-	"ajax-template"\
+    	"ajax-template"\
         "http://localhost:8000/${PHASE}/restful/ajax/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
-        "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
+    	"$CONCURRENCY"\
+        "<esi:include src=\"http://localhost:8000/$PHASE/restful/spouse\" />;<esi:include src=\"http://localhost:8000/$PHASE/restful/children\" />"
+    
     benchmark "${PHASE}"\
         "restful-direct"\
         "http://localhost:10001/${PHASE}/restful/http,direct/family"\
         "$SAMPLESIZE"\
     	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
+    
     benchmark "${PHASE}"\
-	"restful-esi"\
+    	"restful-esi"\
         "http://localhost:10001/${PHASE}/restful/http,esi/family"\
         "$SAMPLESIZE"\
-	"$CONCURRENCY"\
+    	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
-
-
+    
+    
     benchmark "${PHASE}"\
         "control"\
         "http://localhost:8000/${PHASE}/control"\
