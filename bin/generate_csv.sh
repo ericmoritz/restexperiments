@@ -1,5 +1,5 @@
 
-for PHASE in phase1 phase2; do
+for PHASE in phase1 phase2 phase3; do
     mkdir -p docs/source/_static/data/${PHASE}/
 
     for i in data/${PHASE}/*/; do
