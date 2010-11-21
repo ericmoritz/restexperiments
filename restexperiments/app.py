@@ -1,6 +1,7 @@
 from core.controllers import FrontController, serve
 from core import db
 from phase1.app import application as base_app
+from phase3.app import application as phase3
 import time
 
 
@@ -41,10 +42,13 @@ class ConfigMiddleware(object):
 
 phase1 = ConfigMiddleware("phase1", base_app)
 phase2 = LatencyConfigMiddleware("phase2", base_app)
+phase3 = LatencyConfigMiddleware("phase3", phase3)
+
 
 application = FrontController(
     ("/phase1", phase1),
     ("/phase2", phase2),
+    ("/phase3", phase3),    
 )
 
 if __name__ == '__main__':
