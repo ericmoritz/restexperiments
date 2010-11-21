@@ -50,6 +50,17 @@ Phase Two
 Oh no! my database has started sucking.  It's now taking 10ms per db record
 Let's see how my application has faired.
 
+Phase Three
+------------
+
+Everyone in the world just has to read about my family; So now my
+database is overloaded and I'm seeing query times around 10ms. My
+concurrency levels and I have done everything in my power to optimize
+my queries, now what?
+
+Since hopefully my children and spouse resources will not be changing
+anytime soon, I can add expiration based caching onto the resources.
+
 
 Contents
 ===========
@@ -59,6 +70,7 @@ Contents
    
    phase1
    phase2
+   phase3
 
 Indices and tables
 ==================
