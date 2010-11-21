@@ -1,0 +1,1 @@
+<esi:include src="http://localhost:8000/phase1/restful/spouse" />;<esi:include src="http://localhost:8000/phase1/restful/children" />
