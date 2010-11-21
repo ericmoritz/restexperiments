@@ -55,6 +55,13 @@ function base_app_test {
         "Aiden Moritz,Ethan Moritz"
     
     benchmark "${PHASE}"\
+	"ajax-template"\
+        "http://localhost:8000/${PHASE}/restful/esi/family"\
+        "$SAMPLESIZE"\
+	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+    benchmark "${PHASE}"\
     	"traditional-direct"\
         "http://localhost:8000/${PHASE}/conventional/direct/family"\
         "$SAMPLESIZE"\
@@ -132,6 +139,12 @@ function phase3 {
     	"$CONCURRENCY"\
         "Aiden Moritz,Ethan Moritz"
     
+    benchmark "${PHASE}"\
+	"ajax-template"\
+        "http://localhost:8000/${PHASE}/restful/ajax/family"\
+        "$SAMPLESIZE"\
+	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
 
     benchmark "${PHASE}"\
         "restful-direct"\
