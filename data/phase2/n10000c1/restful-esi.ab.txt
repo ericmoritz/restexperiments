@@ -13,32 +13,35 @@ Document Path:          /phase2/restful/esi/family
 Document Length:        37 bytes
 
 Concurrency Level:      1
-Time taken for tests:   227.398 seconds
+Time taken for tests:   225.881 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Keep-Alive requests:    0
 Total transferred:      3910000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    43.98 [#/sec] (mean)
-Time per request:       22.740 [ms] (mean)
-Time per request:       22.740 [ms] (mean, across all concurrent requests)
-Transfer rate:          16.79 [Kbytes/sec] received
+Requests per second:    44.27 [#/sec] (mean)
+Time per request:       22.588 [ms] (mean)
+Time per request:       22.588 [ms] (mean, across all concurrent requests)
+Transfer rate:          16.90 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:    22   23   2.1     23     224
-Waiting:        1    1   2.1      1     202
-Total:         22   23   2.1     23     224
+Processing:    22   23   0.4     22      56
+Waiting:        0    1   0.1      1       2
+Total:         22   23   0.4     22      56
+ERROR: The median and mean for the processing time are more than twice the standard
+       deviation apart. These results are NOT reliable.
+ERROR: The median and mean for the total time are more than twice the standard
+       deviation apart. These results are NOT reliable.
 
 Percentage of the requests served within a certain time (ms)
-  50%     23
+  50%     22
   66%     23
   75%     23
   80%     23
   90%     23
   95%     23
   98%     23
-  99%     24
- 100%    224 (longest request)
+  99%     23
+ 100%     56 (longest request)

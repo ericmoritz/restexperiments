@@ -13,32 +13,31 @@ Document Path:          /phase2/control
 Document Length:        37 bytes
 
 Concurrency Level:      1000
-Time taken for tests:   3.021 seconds
+Time taken for tests:   3.975 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Keep-Alive requests:    0
 Total transferred:      3420000 bytes
 HTML transferred:       370000 bytes
-Requests per second:    3310.66 [#/sec] (mean)
-Time per request:       302.054 [ms] (mean)
-Time per request:       0.302 [ms] (mean, across all concurrent requests)
-Transfer rate:          1105.71 [Kbytes/sec] received
+Requests per second:    2516.02 [#/sec] (mean)
+Time per request:       397.453 [ms] (mean)
+Time per request:       0.397 [ms] (mean, across all concurrent requests)
+Transfer rate:          840.31 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    5  13.4      0      54
-Processing:    37  280  46.2    292     310
-Waiting:       37  279  46.3    292     310
-Total:         91  284  34.2    293     310
+Connect:        0   24 223.4      0    3017
+Processing:    36  343  57.7    362     478
+Waiting:       35  343  58.1    362     477
+Total:        128  367 229.9    362    3418
 
 Percentage of the requests served within a certain time (ms)
-  50%    293
-  66%    295
-  75%    297
-  80%    298
-  90%    301
-  95%    305
-  98%    308
-  99%    309
- 100%    310 (longest request)
+  50%    362
+  66%    367
+  75%    369
+  80%    370
+  90%    375
+  95%    381
+  98%    451
+  99%    473
+ 100%   3418 (longest request)

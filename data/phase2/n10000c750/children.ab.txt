@@ -13,32 +13,31 @@ Document Path:          /phase2/restful/children
 Document Length:        25 bytes
 
 Concurrency Level:      750
-Time taken for tests:   106.801 seconds
+Time taken for tests:   106.469 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
-Keep-Alive requests:    0
 Total transferred:      3300000 bytes
 HTML transferred:       250000 bytes
-Requests per second:    93.63 [#/sec] (mean)
-Time per request:       8010.072 [ms] (mean)
-Time per request:       10.680 [ms] (mean, across all concurrent requests)
-Transfer rate:          30.17 [Kbytes/sec] received
+Requests per second:    93.92 [#/sec] (mean)
+Time per request:       7985.152 [ms] (mean)
+Time per request:       10.647 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.27 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    2   8.5      0      41
-Processing:    22 7707 1232.9   8007    8043
-Waiting:       22 7707 1232.9   8007    8043
-Total:         63 7709 1225.0   8007    8043
+Connect:        0    4  13.6      0      65
+Processing:    31 7680 1229.5   7980    7995
+Waiting:       31 7680 1229.5   7980    7995
+Total:         92 7684 1216.7   7980    7995
 
 Percentage of the requests served within a certain time (ms)
-  50%   8007
-  66%   8010
-  75%   8012
-  80%   8013
-  90%   8017
-  95%   8029
-  98%   8038
-  99%   8041
- 100%   8043 (longest request)
+  50%   7980
+  66%   7982
+  75%   7984
+  80%   7985
+  90%   7987
+  95%   7990
+  98%   7993
+  99%   7994
+ 100%   7995 (longest request)
