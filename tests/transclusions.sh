@@ -46,7 +46,7 @@ function base_app_test {
         "$SAMPLESIZE"\
     	"$CONCURRENCY"\
         ""
-
+    # Test the HTTP stack
     benchmark "${PHASE}"\
     	"spouse"\
         "http://localhost:8000/transclusion/${PHASE}/spouse"\
@@ -62,15 +62,44 @@ function base_app_test {
         "Aiden Moritz,Ethan Moritz"
 
     benchmark "${PHASE}"\
-    	"children"\
+    	"template"\
         "http://localhost:8000/transclusion/${PHASE}/template"\
         "$SAMPLESIZE"\
     	"$CONCURRENCY"\
         "{{ spouse }};{{ children }}"
 
     benchmark "${PHASE}"\
-    	"children"\
+    	"direct-family"\
         "http://localhost:8000/transclusion/${PHASE}/direct/family"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Gina Moritz;Aiden Moritz,Ethan Moritz"
+
+    # Test the HTTP+Varnish stack
+    benchmark "${PHASE}"\
+    	"varnish+spouse"\
+        "http://localhost:10001/transclusion/${PHASE}/spouse"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Gina Moritz"
+    
+    benchmark "${PHASE}"\
+    	"varnish+children"\
+        "http://localhost:10001/transclusion/${PHASE}/children"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "Aiden Moritz,Ethan Moritz"
+
+    benchmark "${PHASE}"\
+    	"varnish+template"\
+        "http://localhost:10001/transclusion/${PHASE}/template"\
+        "$SAMPLESIZE"\
+    	"$CONCURRENCY"\
+        "{{ spouse }};{{ children }}"
+
+    benchmark "${PHASE}"\
+    	"varnish+direct-family"\
+        "http://localhost:10001/transclusion/${PHASE}/direct/family"\
         "$SAMPLESIZE"\
     	"$CONCURRENCY"\
         "Gina Moritz;Aiden Moritz,Ethan Moritz"
@@ -78,11 +107,11 @@ function base_app_test {
 }
 
 function http-test-suite {
-    $1 10000 1
-    $1 10000 250
-    $1 10000 500
-    $1 10000 750
-    $1 10000 1000
+    base_app_test "$1" 10000 1
+    base_app_test "$1" 10000 250
+    base_app_test "$1" 10000 500
+    base_app_test "$1" 10000 750
+    base_app_test "$1" 10000 1000
 }
 
 http-test-suite phase1
