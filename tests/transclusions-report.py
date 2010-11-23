@@ -16,17 +16,27 @@ newdata = defaultdict(dict)
 for level, value in data.items():
     newdata[level]['direct'] = value['direct-family']
 
-    tpr = value['template']['tpr'] + value['spouse']['tpr'] + value['children']['tpr']
+    tpr = value['template']['tpr'] + value['spouse']['tpr']\
+        + value['children']['tpr']
     rps = 1 / tpr * 1000
 
-    newdata[level]['xSI'] = {
+    newdata[level]['SSI'] = {
+        'tpr': tpr,
+        'rps': rps
+        }
+
+    tpr = value['varnish+template']['tpr']\
+        + value['varnish+spouse']['tpr'] + value['varnish+children']['tpr']
+    rps = 1 / tpr * 1000
+
+    newdata[level]['ESI'] = {
         'tpr': tpr,
         'rps': rps
         }
 
 for datapoint in "rps", "tpr":
     # Create a table out of the data
-    table = tocsv(newdata, datapoint,  ["xSI", "direct"])
+    table = tocsv(newdata, datapoint,  ["SSI", "ESI", "direct"])
     # rotate table
     table = map(list, map(None, *table))
 
