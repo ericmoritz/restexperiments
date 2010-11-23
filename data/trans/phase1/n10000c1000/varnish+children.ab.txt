@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        nginx/0.8.53
+Server Hostname:        localhost
+Server Port:            10001
+
+Document Path:          /transclusion/phase1/children
+Document Length:        25 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   7.494 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Total transferred:      3980000 bytes
+HTML transferred:       250000 bytes
+Requests per second:    1334.32 [#/sec] (mean)
+Time per request:       749.443 [ms] (mean)
+Time per request:       0.749 [ms] (mean, across all concurrent requests)
+Transfer rate:          518.61 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    6  19.3      0      81
+Processing:     1  705 613.6    538    5585
+Waiting:        1  705 613.7    538    5584
+Total:          1  711 612.9    543    5585
+
+Percentage of the requests served within a certain time (ms)
+  50%    543
+  66%    778
+  75%    976
+  80%   1115
+  90%   1514
+  95%   1903
+  98%   2520
+  99%   2923
+ 100%   5585 (longest request)
