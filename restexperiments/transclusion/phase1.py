@@ -22,9 +22,15 @@ def children(environ, start_response):
     return [",".join(children)]
 
 
-def template(environ, start_response):
+def ssi_template(environ, start_response):
     start_response("200 OK", [("Content-Type", "text/plain")])
-    return ["{{ spouse }};{{ children }}"]
+    return ['<!--# include virtual="/transclusion/phase1/spouse" -->;',
+            '<!--# include virtual="/transclusion/phase1/children" -->']
+
+def esi_template(environ, start_response):
+    start_response("200 OK", [("Content-Type", "text/plain")])
+    return ['<esi:include src="/transclusion/phase1/spouse">;',
+            '<esi:include src="/transclusion/phase1/children">']
 
 
 def direct_family(environ, start_response):
@@ -50,7 +56,8 @@ application = FrontController(
     ('/control', control),
     ('/spouse', spouse),
     ('/children', children),
-    ('/template', template),
+    ('/ssi-template', ssi_template),
+    ('/esi-template', esi_template),
     ('/direct/family', direct_family),
     ('/indirect/family', indirect_family),
 )
